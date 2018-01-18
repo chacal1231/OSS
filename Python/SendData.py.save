@@ -18,7 +18,7 @@ connection = client.connect()
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect(('181.129.168.242', 7774))
 while 1:
-        #60S values to send
+	#60S Data time variables
 	#SendLFR
 	client.write_register(40027, randint(0,9), unit=0x0a)
 	temps_LFR  = client.read_holding_registers(40027, 1, unit=1)
@@ -68,97 +68,25 @@ while 1:
 	print WCUT
 	client_socket.send(WCUT)
 
-        #Accumulated values to send
+	#Accumulated values to send
         #SendALFR
-	client.write_register(40043, randint(0,9), unit=0x0a)
         temps_ALFR  = client.read_holding_registers(40043, 1, unit=1)
         ALFR = "ALFR=" + str(temps_ALFR.registers)[1:-1]
         print ALFR
         client_socket.send(ALFR)
         #SendAWFR
-	client.write_register(40045, randint(0,9), unit=0x0a)
         temps_AWFR  = client.read_holding_registers(40045, 1, unit=1)
         AWFR = "AWFR=" + str(temps_AWFR.registers)[1:-1]
         print AWFR
         client_socket.send(AWFR)
         #SendAOFR
-	client.write_register(40047, randint(0,9), unit=0x0a)
         temps_AOFR  = client.read_holding_registers(40047, 1, unit=1)
         AOFR = "AOFR=" + str(temps_AOFR.registers)[1:-1]
         print AOFR
         client_socket.send(AOFR)
         #SendAGFR
-	client.write_register(40049, randint(0,9), unit=0x0a)
         temps_AGFR  = client.read_holding_registers(40049, 1, unit=1)
         AGFR = "AGFR=" + str(temps_AGFR.registers)[1:-1]
         print AGFR
         client_socket.send(AGFR)
-
-	#Averages Values to send
-	#SendAALFR
-	client.write_register(40058, randint(0,9), unit=0x0a)
-	temps_AALFR  = client.read_holding_registers(40058, 1, unit=1)
-	AALFR = "AALFR=" + str(temps_AALFR.registers)[1:-1]
-	print AALFR
-	client_socket.send(AALFR)
-	#SendAAWFR
-	client.write_register(40060, randint(0,9), unit=0x0a)
-	temps_AAWFR  = client.read_holding_registers(40060, 1, unit=1)
-	AAWFR = "AAWFR=" + str(temps_AAWFR.registers)[1:-1]
-	print AAWFR
-	client_socket.send(AAWFR)
-	#SendAAOFR
-	client.write_register(40062, randint(0,9), unit=0x0a)
-	temps_AAOFR  = client.read_holding_registers(40062, 1, unit=1)
-	AAOFR = "AAOFR=" + str(temps_AAOFR.registers)[1:-1]
-	print AAOFR
-	client_socket.send(AAOFR)
-	#SendAAGFR
-	client.write_register(40064, randint(0,9), unit=0x0a)
-	temps_AAGFR  = client.read_holding_registers(40064, 1, unit=1)
-	AAGFR = "AAGFR=" + str(temps_AAGFR.registers)[1:-1]
-	print AAGFR
-	client_socket.send(AAGFR)
-	#SendAAWCT
-	client.write_register(40066, randint(0,9), unit=0x0a)
-	temps_AAWCT  = client.read_holding_registers(40066, 1, unit=1)
-	AAWCT = "AAWCT=" + str(temps_AAWCT.registers)[1:-1]
-	print AAWCT
-	client_socket.send(AAWCT)
-	#SendAAGVF
-	client.write_register(40068, randint(0,9), unit=0x0a)
-	temps_AAGVF  = client.read_holding_registers(40068, 1, unit=1)
-	AAGVF = "AAGVF=" + str(temps_AAGVF.registers)[1:-1]
-	print AAGVF
-	client_socket.send(AAGVF)
-	#SendAATMP
-	client.write_register(40070, randint(0,9), unit=0x0a)
-	temps_AATMP  = client.read_holding_registers(40070, 1, unit=1)
-	AATMP = "AATMP=" + str(temps_AATMP.registers)[1:-1]
-	print AATMP
-	client_socket.send(AATMP)
-	#SendAAPRES
-	client.write_register(40072, randint(0,9), unit=0x0a)
-	temps_AAPRES  = client.read_holding_registers(40072, 1, unit=1)
-	AAPRES = "AAPRES=" + str(temps_AAPRES.registers)[1:-1]
-	print AAPRES
-	client_socket.send(AAPRES)
-	#SendAAIPRES
-	client.write_register(40074, randint(0,9), unit=0x0a)
-	temps_AAIPRES  = client.read_holding_registers(40074, 1, unit=1)
-	AAIPRES = "AAIPRES=" + str(temps_AAIPRES.registers)[1:-1]
-	print AAIPRES
-	client_socket.send(AAIPRES)
-	#SendAAOPRES
-	client.write_register(40076, randint(0,9), unit=0x0a)
-	temps_AAOPRES  = client.read_holding_registers(40076, 1, unit=1)
-	AAOPRES = "AAOPRES=" + str(temps_AAOPRES.registers)[1:-1]
-	print AAOPRES
-	client_socket.send(AAOPRES)
-	#SendAAGOR
-	client.write_register(40078, randint(0,9), unit=0x0a)
-	temps_AAGOR  = client.read_holding_registers(40078, 1, unit=1)
-	AAGOR = "AAGOR=" + str(temps_AAOPRES.registers)[1:-1]
-	print AAGOR
-	client_socket.send(AAGOR)
-	time.sleep(30)
+        time.sleep(30)
