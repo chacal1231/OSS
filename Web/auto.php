@@ -200,8 +200,7 @@ while (true) {
 					$WCUT=str_replace("WCUT=","",$data);
 					$Date = date ('Y-m-d H:i:s');
 					$Hour = date ('h:i:s A');
-					$query = mysqli_query($link,"INSERT INTO minutedata(Datex,hour,LFR,WFR,OFR,GFR,TMP,PRE,WCUT) VALUES('$Date','$Hour','$LFR', '$WFR', '$OFR', '$GFR', '$TMP', '$PRE', '$WCUT')");
-					echo mysqli_error($query);
+					mysqli_query($link,"INSERT INTO minutedata(Datex,hour,LFR,WFR,OFR,GFR,TMP,PRE,WCUT) VALUES('$Date','$Hour','$LFR', '$WFR', '$OFR', '$GFR', '$TMP', '$PRE', '$WCUT')");
 				}
 				else if(strpos($data,"C=1")!==false){
 					$s="Command1\r\n";
