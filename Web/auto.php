@@ -179,7 +179,6 @@ while (true) {
 				}
 				else if(strpos($data,"LFR=")!==false){
 					$LFR=str_replace("LFR=","",$data);
-					echo "HOLA FROM PHP";
 				}
 				else if(strpos($data,"WFR=")!==false){
 					$WFR=str_replace("WFR=","",$data);
@@ -201,6 +200,22 @@ while (true) {
 					$Date = date ('Y-m-d H:i:s');
 					$Hour = date ('h:i:s A');
 					mysqli_query($link,"INSERT INTO minutedata(Datex,hour,LFR,WFR,OFR,GFR,TMP,PRE,WCUT) VALUES('$Date','$Hour','$LFR', '$WFR', '$OFR', '$GFR', '$TMP', '$PRE', '$WCUT')");
+				}
+				#Accumulate RX Data
+				else if(strpos($data,"ALxFR=")!==false){
+					$ALFR=str_replace("ALxFR=","",$data);
+				}
+				else if(strpos($data,"AWxFR=")!==false){
+					$AWFR=str_replace("AWxFR=","",$data);
+				}
+				else if(strpos($data,"AOxFR=")!==false){
+					$AOFR=str_replace("AOxFR=","",$data);
+				}
+				else if(strpos($data,"AGxFR=")!==false){
+					$AGFR=str_replace("AGxFR=","",$data);
+					$Date = date ('Y-m-d H:i:s');
+					$Hour = date ('h:i:s A');
+					mysqli_query($link,"INSERT INTO accdata(date,hour,ALFR,AWFR,AOFR,AGFR) VALUES('$Date','$Hour','$ALFR', '$AWFR', '$AOFR', '$AGFR')");
 				}
 				else if(strpos($data,"C=1")!==false){
 					$s="Command1\r\n";
