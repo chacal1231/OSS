@@ -161,4 +161,4 @@ while 1:
 	AAGOR = "AAvGOR=" + str(temps_AAOPRES.registers)[1:-1]
 	print AAGOR
 	client_socket.send(AAGOR)
-	time.sleep(30)
+	time.sleep(60)

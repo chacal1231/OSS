@@ -21,8 +21,8 @@ while 1:
 	#Start DAU Testing
 	DAU_Start  = client.write_register(40002, 0, unit=0x0a)
 	print "DAU testing start"
-	os.system('python SendData.py &')
+	os.system('python /home/pi/OSS/Python/SendData.py &')
     elif ( data == 'Command2\r\n'):
 	print "DAU testing stop"
 	DAU_Stop  = client.write_register(40002, 1, unit=0x0a)
-	os.system('pkill -9 -f SendData.py')
+	os.system('pkill -9 -f /home/pi/OSS/Python/SendData.py')
