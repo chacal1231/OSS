@@ -1,15 +1,20 @@
 <script type="text/javascript" src="http://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
 <?php
+$Date = date ('Y-m-d');
+$TempQuery = mysqli_query($link,"SELECT MAX(TMP),MIN(TMP) from minutedata WHERE Datex='$Date'");
+$ArrayTempQuery = mysqli_fetch_array($TempQuery);
+$MinTMP = $ArrayTempQuery[1];
+$MaxTMP = $ArrayTempQuery[0];
 ?>
 
 <div class="row">
     <div class="col-md-3">
         <div class="mini-stat clearfix">
-            <font size="1"><b>Temperatura en el agua</b></font>
+            <font size="1"><b>DAU Temp</b></font>
             <span class="mini-stat-icon green"><i class="fa fa-thermometer-half"></i></span>
             <div class="mini-stat-info">
-               <button type="button" class="btn btn-danger btn-xs"><?=$t_max?> °C</button><font size="2"> Máxima</font><br>
-                <button type="button" class="btn btn-info btn-xs"><?=$t_min?>°C</button><font size="2"> Mínima</font>
+               <button type="button" class="btn btn-danger btn-xs"><?=$MaxTMP?> °C</button><font size="2"> Max</font><br>
+                <button type="button" class="btn btn-info btn-xs"><?=$MinTMP?>°C</button><font size="2"> Min</font>
                 </div>
         </div>
     </div>
