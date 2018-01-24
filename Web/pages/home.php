@@ -1,45 +1,61 @@
 <script type="text/javascript" src="http://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
 <?php
+$Date = date ('Y-m-d');
+#Temperature query
+$TempQuery = mysqli_query($link,"SELECT MAX(TMP),MIN(TMP) from minutedata WHERE Datex='$Date'");
+$ArrayTempQuery = mysqli_fetch_array($TempQuery);
+$MinTMP = $ArrayTempQuery[1];
+$MaxTMP = $ArrayTempQuery[0];
+
+#Waterflow query
+$WaterQuery = mysqli_query($link,"SELECT WFR,hour FROM minutedata ORDER BY hour DESC");
+$WFR = mysqli_fetch_row($WaterQuery);
+
+#OilFlow query
+$OilQuery = mysqli_query($link,"SELECT OFR,hour FROM minutedata ORDER BY hour DESC");
+$OFR = mysqli_fetch_row($OilQuery);
+
+#GasFlow query
+$GasQuery = mysqli_query($link,"SELECT GFR,hour FROM minutedata ORDER BY hour DESC");
+$GFR = mysqli_fetch_row($GasQuery);
 ?>
 
 <div class="row">
     <div class="col-md-3">
         <div class="mini-stat clearfix">
-            <font size="1"><b>Temperatura en el agua</b></font>
+            <font size="1"><b>DAU Temp</b></font>
             <span class="mini-stat-icon green"><i class="fa fa-thermometer-half"></i></span>
             <div class="mini-stat-info">
-               <button type="button" class="btn btn-danger btn-xs"><?=$t_max?> °C</button><font size="2"> Máxima</font><br>
-                <button type="button" class="btn btn-info btn-xs"><?=$t_min?>°C</button><font size="2"> Mínima</font>
+               <button type="button" class="btn btn-danger btn-xs"><?=$MaxTMP?> °C</button><font size="2"> Max</font><br>
+                <button type="button" class="btn btn-info btn-xs"><?=$MinTMP?>°C</button><font size="2"> Min</font>
                 </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="mini-stat clearfix">
-            <font size="1"><b>pH en el agua</b></font>
-            <span class="mini-stat-icon tar"><i class="fa fa-tint"></i></span>
+            <font size="1"><b>WaterFlow</b></font>
+            <span class="mini-stat-icon tar"><i class="fa fa-shower"></i></span>
             <div class="mini-stat-info">
-                <button type="button" class="btn btn-info btn-xs"><?=$pH_max?> </button><font size="2"> Máxima</font><br>
-                <button type="button" class="btn btn-danger btn-xs"><?=$pH_min?> </button><font size="2"> Mínima</font>
+                <button type="button" class="btn btn-info btn-xs"><?=$WFR[0]?> </button><font size="2"> (Sm3/d)</font><br>
              
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="mini-stat clearfix">
-            <font size="1"><b>Nivel de Comida</b></font> 
-            <span class="mini-stat-icon pink"><i class="fa fa-soundcloud"></i></span>
+            <font size="1"><b>OilFlow</b></font> 
+            <span class="mini-stat-icon pink"><i class="fa fa-tint"></i></span>
             <div class="mini-stat-info">
-            <button type="button" class="btn btn-info btn-xs"><?=$Comi_max?></button><font size="2"> Máxima</font><br>
-                <button type="button" class="btn btn-danger btn-xs"><?=$Comi_min?></button><font size="2"> Mínima</font>  
+            <button type="button" class="btn btn-info btn-xs"><?=$OFR[0]?></button><font size="2"> (Sm3/d)</font><br>
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="mini-stat clearfix">
-            <font size="1"><b>Calidad del ambiente</b></font>
-            <span class="mini-stat-icon green"><i class="fa fa-heart"></i></span>
+            <font size="1"><b>GasFlow</b></font>
+            <span class="mini-stat-icon green"><i class="fa fa-soundcloud"></i></span>
             <div class="mini-stat-info">
-                <button type="button" class="btn btn-info btn-xs"><?=$Calidad?></button><font size="2">  </font>
+                <button type="button" class="btn btn-info btn-xs"><?=$GFR[0]?></button><font size="2"> (Sm3/d)</font>
                 <br>
             </div>
         </div>

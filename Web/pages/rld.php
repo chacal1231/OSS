@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
 <?php
-$result=mysqli_query($link,"SELECT * FROM minutedata ORDER BY Datex DESC");
+$result=mysqli_query($link,"SELECT * FROM minutedata ORDER BY hour DESC");
 $row=mysqli_fetch_array($result);
 ?>
 
@@ -12,13 +12,13 @@ $row=mysqli_fetch_array($result);
                                         <tr>
                                             <th>Date</th>
                                             <th>Hour</th>
-                                            <th>Liquid flow rate</th>
-                                            <th>Water flow rate</th>
-                                            <th>Oil flow rate</th>
-                                            <th>Gas flow rate</th>
-                                            <th>Temperature</th>
-                                            <th>Pressure</th>
-                                            <th>Water Cut</th>
+                                            <th>LiquidFlow (Sm3/d)</th>
+                                            <th>WaterFlow (Sm3/d)</th>
+                                            <th>OilFlow (Sm3/d)</th>
+                                            <th>GasFlow (Sm3/d)</th>
+                                            <th>Temp (°C)</th>
+                                            <th>Press (kPa)</th>
+                                            <th>Water Cut (%)</th>
                                         </tr>
                                     </thead>
                                     <tbody>

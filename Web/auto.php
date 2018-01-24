@@ -197,8 +197,8 @@ while (true) {
 				}
 				else if(strpos($data,"WCUT=")!==false){
 					$WCUT=str_replace("WCUT=","",$data);
-					$Date = date ('Y-m-d H:i:s');
-					$Hour = date ('h:i:s A');
+					$Date = date ('Y-m-d');
+					$Hour = date ('h:i:s');
 					mysqli_query($link,"INSERT INTO minutedata(Datex,hour,LFR,WFR,OFR,GFR,TMP,PRE,WCUT) VALUES('$Date','$Hour','$LFR', '$WFR', '$OFR', '$GFR', '$TMP', '$PRE', '$WCUT')");
 				}
 				#Accumulate RX Data
@@ -213,9 +213,47 @@ while (true) {
 				}
 				else if(strpos($data,"AGxFR=")!==false){
 					$AGFR=str_replace("AGxFR=","",$data);
-					$Date = date ('Y-m-d H:i:s');
-					$Hour = date ('h:i:s A');
+					$Date = date ('Y-m-d');
+					$Hour = date ('h:i:s');
 					mysqli_query($link,"INSERT INTO accdata(date,hour,ALFR,AWFR,AOFR,AGFR) VALUES('$Date','$Hour','$ALFR', '$AWFR', '$AOFR', '$AGFR')");
+				}
+
+				#Average RX data
+				else if(strpos($data,"AALvFR=")!==false){
+					$AALFR=str_replace("AALvFR=","",$data);
+				}
+				else if(strpos($data,"AAWvFR=")!==false){
+					$AAWFR=str_replace("AAWvFR=","",$data);
+				}
+				else if(strpos($data,"AAOvFR=")!==false){
+					$AAOFR=str_replace("AAOvFR=","",$data);
+				}
+				else if(strpos($data,"AAGvFR=")!==false){
+					$AAGFR=str_replace("AAGvFR=","",$data);
+				}
+				else if(strpos($data,"AAWvCT=")!==false){
+					$AAWCT=str_replace("AAWvCT=","",$data);
+				}
+				else if(strpos($data,"AAGvVF=")!==false){
+					$AAGVF=str_replace("AAGvVF=","",$data);
+				}
+				else if(strpos($data,"AATvMP=")!==false){
+					$AATMP=str_replace("AATvMP=","",$data);
+				}
+				else if(strpos($data,"AAPvRES=")!==false){
+					$AAPRES=str_replace("AAPvRES=","",$data);
+				}
+				else if(strpos($data,"AAIvPRES=")!==false){
+					$AAIPRES=str_replace("AAIvPRES=","",$data);
+				}
+				else if(strpos($data,"AAOPRvES=")!==false){
+					$AAOPRES=str_replace("AAOPRvES=","",$data);
+				}
+				else if(strpos($data,"AAvGOR=")!==false){
+					$AAGOR=str_replace("AAvGOR=","",$data);
+					$Date = date ('Y-m-d');
+					$Hour = date ('h:i:s');
+					mysqli_query($link,"INSERT INTO avedata(date,hour,AALFR,AAWFR,AAOFR,AAGFR,AAWCT,AAGVF,AATMP,AAPRES,AAIPRES,AAOPRES,AAGOR) VALUES('$Date','$Hour','$AALFR', '$AAWFR', '$AAOFR', '$AAGFR', '$AAWCT', '$AAGVF', '$AATMP', '$AAPRES', '$AAIPRES', '$AAOPRES', '$AAGOR')");
 				}
 				else if(strpos($data,"C=1")!==false){
 					$s="Command1\r\n";
