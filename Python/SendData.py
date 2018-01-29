@@ -15,15 +15,23 @@ while 1:
 	#Connect to Master Modbus every loop
 	connection = client.connect()
 
+	#Read holding registers
+	TempsHG	= client.read_holding_registers(14, 100, unit=1)
     #60S values to send
+    #Status DAU
+    Dau_Status = "DAU" + str(TempsHG.registers[0])
+    print Dau_Status
+    client_socket.send(Dau_Status)
 	#SendLFR
-	temps_LFR  = client.read_holding_registers(40027, 1, unit=1)
-	LFR = "LFR=" + str(temps_LFR.registers)[1:-1]
+	DEC_LFR = [TempsHG.registers[8],TempsHG.registers[7]]
+    LFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_LFR)]
+	LFR = "LFR=" + str(LFR_float)
 	client_socket.send(LFR)
+	'''
 	#SendWFR
 	temps_WFR  = client.read_holding_registers(40029, 1, unit=1)
-        WFR = "WFR=" + str(temps_WFR.registers)[1:-1]
-        client_socket.send(WFR)
+    WFR = "WFR=" + str(temps_WFR.registers)[1:-1]
+    client_socket.send(WFR)
 	#SendOFR
 	temps_OFR  = client.read_holding_registers(40031, 1, unit=1)
 	OFR = "OFR=" + str(temps_OFR.registers)[1:-1]
@@ -113,6 +121,7 @@ while 1:
 	AAGOR = "AAvGOR=" + str(temps_AAOPRES.registers)[1:-1]
 	client_socket.send(AAGOR)
 	#Close client every loop
+	'''
 	client.close()
 	#Wait 60 seconds to do loop
 	time.sleep(60)
