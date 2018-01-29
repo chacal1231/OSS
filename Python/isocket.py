@@ -9,7 +9,7 @@ import os
 #unit= the slave unit this request is targeting
 #address= the starting address to read from
 
-client= ModbusClient(method = "rtu", port="/dev/ttyS0",stopbits = 1, bytesize = 8, parity = 'N', baudrate= 9600)
+client= ModbusClient(method = "rtu", port="/dev/ttyUSB0",stopbits = 1, bytesize = 8, parity = 'N', baudrate= 9600)
 
 #Connect to the serial modbus server
 connection = client.connect()
@@ -22,11 +22,11 @@ while 1:
     data = client_socket.recv(512)
     if ( data == 'Command1\r\n'):
 	#Start DAU Testing
-	DAU_Start  = client.write_register(40002, 0, unit=0x0a)
+	DAU_Start  = client.write_register(1, 0, unit=1)
 	print "DAU testing start"
 	#os.system('nohup python /home/pi/OSS/Python/SendData.py &')
     elif ( data == 'Command2\r\n'):
 	print "DAU testing stop"
-	DAU_Stop  = client.write_register(40002, 1, unit=0x0a)
+	DAU_Stop  = client.write_register(1, 1, unit=1)
 	os.system('pkill -9 -f /home/pi/OSS/Python/SendData.py')
 
