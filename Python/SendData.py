@@ -9,11 +9,13 @@ from pymodbus.transaction import ModbusRtuFramer
 client= ModbusClient(method = "rtu", port="/dev/ttyS0",stopbits = 1, bytesize = 8, parity = 'N', baudrate= 9600)
 
 #Connect to the serial modbus server
-connection = client.connect()
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect(('181.129.168.242', 7774))
 while 1:
-        #60S values to send
+	#Connect to Master Modbus every loop
+	connection = client.connect()
+
+    #60S values to send
 	#SendLFR
 	temps_LFR  = client.read_holding_registers(40027, 1, unit=1)
 	LFR = "LFR=" + str(temps_LFR.registers)[1:-1]
@@ -47,23 +49,23 @@ while 1:
 	WCUT = "WCUT=" + str(temps_WCUT.registers)[1:-1]
 	client_socket.send(WCUT)
 
-        #Accumulated values to send
-        #SendALFR
-        temps_ALFR  = client.read_holding_registers(40043, 1, unit=1)
-        ALFR = "ALxFR=" + str(temps_ALFR.registers)[1:-1]
-        client_socket.send(ALFR)
-        #SendAWFR
-        temps_AWFR  = client.read_holding_registers(40045, 1, unit=1)
-        AWFR = "AWxFR=" + str(temps_AWFR.registers)[1:-1]
-        client_socket.send(AWFR)
-        #SendAOFR
-        temps_AOFR  = client.read_holding_registers(40047, 1, unit=1)
-        AOFR = "AOxFR=" + str(temps_AOFR.registers)[1:-1]
-        client_socket.send(AOFR)
-        #SendAGFR
-        temps_AGFR  = client.read_holding_registers(40049, 1, unit=1)
-        AGFR = "AGxFR=" + str(temps_AGFR.registers)[1:-1]
-        client_socket.send(AGFR)
+    #Accumulated values to send
+    #SendALFR
+    temps_ALFR  = client.read_holding_registers(40043, 1, unit=1)
+    ALFR = "ALxFR=" + str(temps_ALFR.registers)[1:-1]
+    client_socket.send(ALFR)
+    #SendAWFR
+    temps_AWFR  = client.read_holding_registers(40045, 1, unit=1)
+    AWFR = "AWxFR=" + str(temps_AWFR.registers)[1:-1]
+    client_socket.send(AWFR)
+    #SendAOFR
+    temps_AOFR  = client.read_holding_registers(40047, 1, unit=1)
+    AOFR = "AOxFR=" + str(temps_AOFR.registers)[1:-1]
+    client_socket.send(AOFR)
+    #SendAGFR
+    temps_AGFR  = client.read_holding_registers(40049, 1, unit=1)
+    AGFR = "AGxFR=" + str(temps_AGFR.registers)[1:-1]
+    client_socket.send(AGFR)
 
 	#Averages Values to send
 	#SendAALFR
@@ -110,4 +112,7 @@ while 1:
 	temps_AAGOR  = client.read_holding_registers(40078, 1, unit=1)
 	AAGOR = "AAvGOR=" + str(temps_AAOPRES.registers)[1:-1]
 	client_socket.send(AAGOR)
+	#Close client every loop
+	client.close()
+	#Wait 60 seconds to do loop
 	time.sleep(60)
