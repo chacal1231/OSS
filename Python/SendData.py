@@ -5,8 +5,9 @@ import time
 from pymodbus.pdu import ModbusRequest
 from pymodbus.client.sync import ModbusSerialClient as ModbusClient #initialize a serial RTU client instance
 from pymodbus.transaction import ModbusRtuFramer
+from pyModbusTCP import utils
 
-client= ModbusClient(method = "rtu", port="/dev/ttyS0",stopbits = 1, bytesize = 8, parity = 'N', baudrate= 9600)
+client= ModbusClient(method = "rtu", port="/dev/ttyUSB0",stopbits = 1, bytesize = 8, parity = 'N', baudrate= 9600)
 
 #Connect to the serial modbus server
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -17,21 +18,22 @@ while 1:
 
 	#Read holding registers
 	TempsHG	= client.read_holding_registers(14, 100, unit=1)
-    #60S values to send
-    #Status DAU
-    Dau_Status = "DAU" + str(TempsHG.registers[0])
-    print Dau_Status
-    client_socket.send(Dau_Status)
-	#SendLFR
+    	#60S values to send
+    	#Status DAU
+    	Dau_Status = "DAU_S=" + str(TempsHG.registers[0])
+    	print Dau_Status
+    	client_socket.send(Dau_Status)
+    	#SendLFR
 	DEC_LFR = [TempsHG.registers[8],TempsHG.registers[7]]
-    LFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_LFR)]
-	LFR = "LFR=" + str(LFR_float)
+    	LFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_LFR)]
+	LFR = "LFR=" + str(LFR_float)[1:-1]
+	print LFR
 	client_socket.send(LFR)
 	'''
 	#SendWFR
 	temps_WFR  = client.read_holding_registers(40029, 1, unit=1)
-    WFR = "WFR=" + str(temps_WFR.registers)[1:-1]
-    client_socket.send(WFR)
+    	WFR = "WFR=" + str(temps_WFR.registers)[1:-1]
+    	client_socket.send(WFR)
 	#SendOFR
 	temps_OFR  = client.read_holding_registers(40031, 1, unit=1)
 	OFR = "OFR=" + str(temps_OFR.registers)[1:-1]
@@ -57,23 +59,23 @@ while 1:
 	WCUT = "WCUT=" + str(temps_WCUT.registers)[1:-1]
 	client_socket.send(WCUT)
 
-    #Accumulated values to send
-    #SendALFR
-    temps_ALFR  = client.read_holding_registers(40043, 1, unit=1)
-    ALFR = "ALxFR=" + str(temps_ALFR.registers)[1:-1]
-    client_socket.send(ALFR)
-    #SendAWFR
-    temps_AWFR  = client.read_holding_registers(40045, 1, unit=1)
-    AWFR = "AWxFR=" + str(temps_AWFR.registers)[1:-1]
-    client_socket.send(AWFR)
-    #SendAOFR
-    temps_AOFR  = client.read_holding_registers(40047, 1, unit=1)
-    AOFR = "AOxFR=" + str(temps_AOFR.registers)[1:-1]
-    client_socket.send(AOFR)
-    #SendAGFR
-    temps_AGFR  = client.read_holding_registers(40049, 1, unit=1)
-    AGFR = "AGxFR=" + str(temps_AGFR.registers)[1:-1]
-    client_socket.send(AGFR)
+    	#Accumulated values to send
+    	#SendALFR
+    	temps_ALFR  = client.read_holding_registers(40043, 1, unit=1)
+    	ALFR = "ALxFR=" + str(temps_ALFR.registers)[1:-1]
+    	client_socket.send(ALFR)
+    	#SendAWFR
+    	temps_AWFR  = client.read_holding_registers(40045, 1, unit=1)
+    	AWFR = "AWxFR=" + str(temps_AWFR.registers)[1:-1]
+    	client_socket.send(AWFR)
+    	#SendAOFR
+   	 temps_AOFR  = client.read_holding_registers(40047, 1, unit=1)
+    	AOFR = "AOxFR=" + str(temps_AOFR.registers)[1:-1]
+    	client_socket.send(AOFR)
+   	#SendAGFR
+    	temps_AGFR  = client.read_holding_registers(40049, 1, unit=1)
+  	  AGFR = "AGxFR=" + str(temps_AGFR.registers)[1:-1]
+    	client_socket.send(AGFR)
 
 	#Averages Values to send
 	#SendAALFR
