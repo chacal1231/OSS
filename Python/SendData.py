@@ -17,113 +17,164 @@ while 1:
 	connection = client.connect()
 
 	#Read holding registers
-	TempsHG	= client.read_holding_registers(14, 100, unit=1)
-    	#60S values to send
-    	#Status DAU
-    	Dau_Status = "DAU_S=" + str(TempsHG.registers[0])
-    	print Dau_Status
-    	client_socket.send(Dau_Status)
-    	#SendLFR
-	DEC_LFR = [TempsHG.registers[8],TempsHG.registers[7]]
-    	LFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_LFR)]
+	TempsHG	= client.read_holding_registers(13, 100, unit=1)
+	
+	#60S values to send
+    #Status DAU
+    Dau_Status = "DAU_S=" + str(TempsHG.registers[1])
+    print Dau_Status
+    client_socket.send(Dau_Status)
+    
+    #SendLFR
+	DEC_LFR = [TempsHG.registers[14],TempsHG.registers[13]]
+    LFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_LFR)]
 	LFR = "LFR=" + str(LFR_float)[1:-1]
 	print LFR
 	client_socket.send(LFR)
-	'''
+	
 	#SendWFR
-	temps_WFR  = client.read_holding_registers(40029, 1, unit=1)
-    	WFR = "WFR=" + str(temps_WFR.registers)[1:-1]
-    	client_socket.send(WFR)
+	DEC_WFR  = [TempsHG.registers[16],TempsHG.registers[15]]
+    WFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_WFR)]
+    WFR = "WFR=" + str(WFR_float)[1:-1]
+    print WFR
+    client_socket.send(WFR)
+	
 	#SendOFR
-	temps_OFR  = client.read_holding_registers(40031, 1, unit=1)
-	OFR = "OFR=" + str(temps_OFR.registers)[1:-1]
+	DEC_OFR  = [TempsHG.registers[18],TempsHG.registers[17]]
+	WFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_OFR)]
+	OFR = "OFR=" + str(WFR_float)[1:-1]
+	print OFR
 	client_socket.send(OFR)
+	
 	#SendGFR
-	temps_GFR  = client.read_holding_registers(40033, 1, unit=1)
-	GFR = "GFR=" + str(temps_GFR.registers)[1:-1]
+	DEC_GFR  = [TempsHG.registers[20],TempsHG.registers[19]]
+	GFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_GFR)]
+	GFR = "GFR=" + str(GFR_float)[1:-1]
+	print GFR
 	client_socket.send(GFR)
+	
 	#SendGVF
-	temps_GVF  = client.read_holding_registers(40035, 1, unit=1)
-	GVF = "GVF=" + str(temps_GVF.registers)[1:-1]
+	DEC_GVF  = [TempsHG.registers[22],TempsHG.registers[21]]
+	GVF_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_GFR)]
+	GVF = "GVF=" + str(GVF_float)[1:-1]
+	print GVF
 	client_socket.send(GVF)
+	
 	#SendTMP
-	temps_TMP  = client.read_holding_registers(40037, 1, unit=1)
-	TMP = "TMP=" + str(temps_TMP.registers)[1:-1]
+	DEC_TMP  = [TempsHG.registers[24],TempsHG.registers[23]]
+	TMP_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_TMP)]
+	TMP = "TMP=" + str(TMP_float)[1:-1]
+	print TMP
 	client_socket.send(TMP)
+	
 	#SendPRE
-	temps_PRE  = client.read_holding_registers(40039, 1, unit=1)
-	PRE = "PRE=" + str(temps_PRE.registers)[1:-1]
+	DEC_PRE  = [TempsHG.registers[26],TempsHG.registers[25]]
+	PRE_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_TMP)]
+	PRE = "PRE=" + str(PRE_float)[1:-1]
+	print PRE
 	client_socket.send(PRE)
+	
 	#SendWCUT
-	temps_WCUT  = client.read_holding_registers(40041, 1, unit=1)
-	WCUT = "WCUT=" + str(temps_WCUT.registers)[1:-1]
+	DEC_WCUT  = [TempsHG.registers[28],TempsHG.registers[27]]
+	WCUT_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_WCUT)]
+	WCUT = "WCUT=" + str(WCUT_float)[1:-1]
+	print WCUT
 	client_socket.send(WCUT)
 
-    	#Accumulated values to send
-    	#SendALFR
-    	temps_ALFR  = client.read_holding_registers(40043, 1, unit=1)
-    	ALFR = "ALxFR=" + str(temps_ALFR.registers)[1:-1]
-    	client_socket.send(ALFR)
-    	#SendAWFR
-    	temps_AWFR  = client.read_holding_registers(40045, 1, unit=1)
-    	AWFR = "AWxFR=" + str(temps_AWFR.registers)[1:-1]
-    	client_socket.send(AWFR)
-    	#SendAOFR
-   	 temps_AOFR  = client.read_holding_registers(40047, 1, unit=1)
-    	AOFR = "AOxFR=" + str(temps_AOFR.registers)[1:-1]
-    	client_socket.send(AOFR)
+    #Accumulated values to send
+    #SendALFR
+    DEC_ALFR  = [TempsHG.registers[30],TempsHG.registers[29]]
+    ALFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_ALFR)]
+    ALFR = "ALxFR=" + str(ALFR_float)[1:-1]
+    print ALFR
+    client_socket.send(ALFR)
+    #SendAWFR
+    DEC_AWFR  = [TempsHG.registers[32],TempsHG.registers[31]]
+    AWFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AWFR)]
+    AWFR = "AWxFR=" + str(AWFR_float)[1:-1]
+    print AWFR
+    client_socket.send(AWFR)
+    #SendAOFR
+   	DEC_AOFR  = [TempsHG.registers[34],TempsHG.registers[33]]
+   	AOFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AOFR)]
+    AOFR = "AOxFR=" + str(AOFR_float)[1:-1]
+    print AOFR
+    client_socket.send(AOFR)
    	#SendAGFR
-    	temps_AGFR  = client.read_holding_registers(40049, 1, unit=1)
-  	  AGFR = "AGxFR=" + str(temps_AGFR.registers)[1:-1]
-    	client_socket.send(AGFR)
+    DEC_AGFR  = [TempsHG.registers[36],TempsHG.registers[35]]
+    AGFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AGFR)]
+  	AGFR = "AGxFR=" + str(AGFR_float)[1:-1]
+  	print AGFR
+    client_socket.send(AGFR)
 
 	#Averages Values to send
 	#SendAALFR
-	temps_AALFR  = client.read_holding_registers(40058, 1, unit=1)
-	AALFR = "AALvFR=" + str(temps_AALFR.registers)[1:-1]
+	DEC_AALFR  = [TempsHG.registers[45],TempsHG.registers[44]]
+	AALFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AALFR)]
+	AALFR = "AALvFR=" + str(AALFR_float)[1:-1]
+	print AALFR
 	client_socket.send(AALFR)
 	#SendAAWFR
-	temps_AAWFR  = client.read_holding_registers(40060, 1, unit=1)
-	AAWFR = "AAWvFR=" + str(temps_AAWFR.registers)[1:-1]
+	DEC_AAWFR  = [TempsHG.registers[47],TempsHG.registers[46]]
+	AAWFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AAWFR)]
+	AAWFR = "AAWvFR=" + str(AAWFR_float)[1:-1]
+	print AAWFR
 	client_socket.send(AAWFR)
 	#SendAAOFR
-	temps_AAOFR  = client.read_holding_registers(40062, 1, unit=1)
-	AAOFR = "AAOvFR=" + str(temps_AAOFR.registers)[1:-1]
+	DEC_AAOFR  = [TempsHG.registers[49],TempsHG.registers[48]]
+	AAOFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AAOFR)]
+	AAOFR = "AAOvFR=" + str(AAOFR_float)[1:-1]
+	print AAOFR
 	client_socket.send(AAOFR)
 	#SendAAGFR
-	temps_AAGFR  = client.read_holding_registers(40064, 1, unit=1)
-	AAGFR = "AAGvFR=" + str(temps_AAGFR.registers)[1:-1]
+	DEC_AAGFR  = [TempsHG.registers[51],TempsHG.registers[50]]
+	AAGFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AAGFR)]
+	AAGFR = "AAGvFR=" + str(AAGFR_float)[1:-1]
+	print AAGFR
 	client_socket.send(AAGFR)
 	#SendAAWCT
-	temps_AAWCT  = client.read_holding_registers(40066, 1, unit=1)
-	AAWCT = "AAWvCT=" + str(temps_AAWCT.registers)[1:-1]
+	DEC_AAWCT  = [TempsHG.registers[53],TempsHG.registers[52]]
+	AAWCT_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AAWCT)]
+	AAWCT = "AAWvCT=" + str(AAWCT_float)[1:-1]
+	print AAWCT
 	client_socket.send(AAWCT)
 	#SendAAGVF
-	temps_AAGVF  = client.read_holding_registers(40068, 1, unit=1)
-	AAGVF = "AAGvVF=" + str(temps_AAGVF.registers)[1:-1]
+	DEC_AAGVF  = [TempsHG.registers[55],TempsHG.registers[54]]
+	AAGVF_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AAGVF)]
+	AAGVF = "AAGvVF=" + str(AAGVF_float)[1:-1]
+	print AAGVF
 	client_socket.send(AAGVF)
 	#SendAATMP
-	temps_AATMP  = client.read_holding_registers(40070, 1, unit=1)
-	AATMP = "AATvMP=" + str(temps_AATMP.registers)[1:-1]
+	DEC_AATMP  = [TempsHG.registers[57],TempsHG.registers[56]]
+	AATMP_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AATMP)]
+	AATMP = "AATvMP=" + str(AATMP_float)[1:-1]
+	print AATMP
 	client_socket.send(AATMP)
 	#SendAAPRES
-	temps_AAPRES  = client.read_holding_registers(40072, 1, unit=1)
-	AAPRES = "AAPvRES=" + str(temps_AAPRES.registers)[1:-1]
+	DEC_AAPRES  = [TempsHG.registers[59],TempsHG.registers[58]]
+	AAPRES_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AAPRES)]
+	AAPRES = "AAPvRES=" + str(AAPRES_float)[1:-1]
+	print AAPRES
 	client_socket.send(AAPRES)
 	#SendAAIPRES
-	temps_AAIPRES  = client.read_holding_registers(40074, 1, unit=1)
-	AAIPRES = "AAIvPRES=" + str(temps_AAIPRES.registers)[1:-1]
+	DEC_AAIPRES  = [TempsHG.registers[61],TempsHG.registers[60]]
+	AAIPRES_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AAIPRES)]
+	AAIPRES = "AAIvPRES=" + str(AAIPRES_float)[1:-1]
+	print AAIPRES
 	client_socket.send(AAIPRES)
 	#SendAAOPRES
-	temps_AAOPRES  = client.read_holding_registers(40076, 1, unit=1)
-	AAOPRES = "AAOPRvES=" + str(temps_AAOPRES.registers)[1:-1]
+	DEC_AAOPRES  = [TempsHG.registers[63],TempsHG.registers[62]]
+	AAOPRES_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AAOPRES)]
+	AAOPRES = "AAOPRvES=" + str(AAOPRES_float)[1:-1]
+	print AAOPRES
 	client_socket.send(AAOPRES)
 	#SendAAGOR
-	temps_AAGOR  = client.read_holding_registers(40078, 1, unit=1)
-	AAGOR = "AAvGOR=" + str(temps_AAOPRES.registers)[1:-1]
+	DEC_AAGOR  = [TempsHG.registers[65],TempsHG.registers[64]]
+	AAGOR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AAGOR)]
+	AAGOR = "AAvGOR=" + str(AAGOR_float)[1:-1]
+	print AAGOR
 	client_socket.send(AAGOR)
 	#Close client every loop
-	'''
 	client.close()
 	#Wait 60 seconds to do loop
 	time.sleep(60)
