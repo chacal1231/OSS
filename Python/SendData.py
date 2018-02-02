@@ -20,24 +20,24 @@ while 1:
 	TempsHG	= client.read_holding_registers(13, 100, unit=1)
 	
 	#60S values to send
-    #Status DAU
-    Dau_Status = "DAU_S=" + str(TempsHG.registers[1])
-    print Dau_Status
-    client_socket.send(Dau_Status)
+    	#Status DAU
+    	Dau_Status = "DAU_S=" + str(TempsHG.registers[1])
+    	print Dau_Status
+    	client_socket.send(Dau_Status)
     
-    #SendLFR
+    	#SendLFR
 	DEC_LFR = [TempsHG.registers[14],TempsHG.registers[13]]
-    LFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_LFR)]
+	LFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_LFR)]
 	LFR = "LFR=" + str(LFR_float)[1:-1]
 	print LFR
 	client_socket.send(LFR)
 	
 	#SendWFR
 	DEC_WFR  = [TempsHG.registers[16],TempsHG.registers[15]]
-    WFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_WFR)]
-    WFR = "WFR=" + str(WFR_float)[1:-1]
-    print WFR
-    client_socket.send(WFR)
+    	WFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_WFR)]
+    	WFR = "WFR=" + str(WFR_float)[1:-1]
+    	print WFR
+    	client_socket.send(WFR)
 	
 	#SendOFR
 	DEC_OFR  = [TempsHG.registers[18],TempsHG.registers[17]]
@@ -69,7 +69,7 @@ while 1:
 	
 	#SendPRE
 	DEC_PRE  = [TempsHG.registers[26],TempsHG.registers[25]]
-	PRE_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_TMP)]
+	PRE_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_PRE)]
 	PRE = "PRE=" + str(PRE_float)[1:-1]
 	print PRE
 	client_socket.send(PRE)
@@ -81,31 +81,31 @@ while 1:
 	print WCUT
 	client_socket.send(WCUT)
 
-    #Accumulated values to send
-    #SendALFR
-    DEC_ALFR  = [TempsHG.registers[30],TempsHG.registers[29]]
-    ALFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_ALFR)]
-    ALFR = "ALxFR=" + str(ALFR_float)[1:-1]
-    print ALFR
-    client_socket.send(ALFR)
-    #SendAWFR
-    DEC_AWFR  = [TempsHG.registers[32],TempsHG.registers[31]]
-    AWFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AWFR)]
-    AWFR = "AWxFR=" + str(AWFR_float)[1:-1]
-    print AWFR
-    client_socket.send(AWFR)
-    #SendAOFR
+    	#Accumulated values to send
+    	#SendALFR
+    	DEC_ALFR  = [TempsHG.registers[30],TempsHG.registers[29]]
+    	ALFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_ALFR)]
+    	ALFR = "ALxFR=" + str(ALFR_float)[1:-1]
+    	print ALFR
+    	client_socket.send(ALFR)
+    	#SendAWFR
+    	DEC_AWFR  = [TempsHG.registers[32],TempsHG.registers[31]]
+    	AWFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AWFR)]
+    	AWFR = "AWxFR=" + str(AWFR_float)[1:-1]
+    	print AWFR
+    	client_socket.send(AWFR)
+    	#SendAOFR
    	DEC_AOFR  = [TempsHG.registers[34],TempsHG.registers[33]]
    	AOFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AOFR)]
-    AOFR = "AOxFR=" + str(AOFR_float)[1:-1]
-    print AOFR
-    client_socket.send(AOFR)
+   	AOFR = "AOxFR=" + str(AOFR_float)[1:-1]
+    	print AOFR
+    	client_socket.send(AOFR)
    	#SendAGFR
-    DEC_AGFR  = [TempsHG.registers[36],TempsHG.registers[35]]
-    AGFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AGFR)]
+    	DEC_AGFR  = [TempsHG.registers[36],TempsHG.registers[35]]
+    	AGFR_float = [utils.decode_ieee(f) for f in utils.word_list_to_long(DEC_AGFR)]
   	AGFR = "AGxFR=" + str(AGFR_float)[1:-1]
   	print AGFR
-    client_socket.send(AGFR)
+    	client_socket.send(AGFR)
 
 	#Averages Values to send
 	#SendAALFR
