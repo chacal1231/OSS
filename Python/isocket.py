@@ -25,7 +25,7 @@ while 1:
 	#Start DAU Testing
 	DAU_Start  = client.write_register(1, 0, unit=1)
 	print "DAU testing start"
-	time.sleep(10)
+	time.sleep(70)
 	os.system('sudo python /home/pi/OSS/Python/SendData.py &')
     elif ( data == 'Command2\r\n'):
 	print "DAU testing stop"
