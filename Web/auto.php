@@ -178,22 +178,22 @@ while (true) {
 				socket_write($socket, $s, strlen($s));
 				}
 				else if(strpos($data,"LFR=")!==false){
-					$LFR=str_replace("LFR=","",$data);
+					$LFR=round(str_replace("LFR=","",$data),2);
 				}
 				else if(strpos($data,"WFR=")!==false){
-					$WFR=str_replace("WFR=","",$data);
+					$WFR=round(str_replace("WFR=","",$data),2);
 				}
 				else if(strpos($data,"OFR=")!==false){
-					$OFR=str_replace("OFR=","",$data);
+					$OFR=round(str_replace("OFR=","",$data),2);
 				}
 				else if(strpos($data,"GFR=")!==false){
-					$GFR=str_replace("GFR=","",$data);
+					$GFR=round(str_replace("GFR=","",$data),2);
 				}
 				else if(strpos($data,"TMP=")!==false){
-					$TMP=str_replace("TMP=","",$data);
+					$TMP=round(str_replace("TMP=","",$data),2);
 				}
 				else if(strpos($data,"PRE=")!==false){
-					$PRE=str_replace("PRE=","",$data);
+					$PRE=round(str_replace("PRE=","",$data),2);
 				}
 				else if(strpos($data,"WCUT=")!==false){
 					$WCUT=str_replace("WCUT=","",$data);
@@ -203,13 +203,13 @@ while (true) {
 				}
 				#Accumulate RX Data
 				else if(strpos($data,"ALxFR=")!==false){
-					$ALFR=str_replace("ALxFR=","",$data);
+					$ALFR=round(str_replace("ALxFR=","",$data),2);
 				}
 				else if(strpos($data,"AWxFR=")!==false){
-					$AWFR=str_replace("AWxFR=","",$data);
+					$AWFR=round(str_replace("AWxFR=","",$data),2);
 				}
 				else if(strpos($data,"AOxFR=")!==false){
-					$AOFR=str_replace("AOxFR=","",$data);
+					$AOFR=round(str_replace("AOxFR=","",$data),2);
 				}
 				else if(strpos($data,"AGxFR=")!==false){
 					$AGFR=str_replace("AGxFR=","",$data);
@@ -220,34 +220,34 @@ while (true) {
 
 				#Average RX data
 				else if(strpos($data,"AALvFR=")!==false){
-					$AALFR=str_replace("AALvFR=","",$data);
+					$AALFR=round(str_replace("AALvFR=","",$data),2);
 				}
 				else if(strpos($data,"AAWvFR=")!==false){
-					$AAWFR=str_replace("AAWvFR=","",$data);
+					$AAWFR=round(str_replace("AAWvFR=","",$data),2);
 				}
 				else if(strpos($data,"AAOvFR=")!==false){
-					$AAOFR=str_replace("AAOvFR=","",$data);
+					$AAOFR=round(str_replace("AAOvFR=","",$data),2);
 				}
 				else if(strpos($data,"AAGvFR=")!==false){
-					$AAGFR=str_replace("AAGvFR=","",$data);
+					$AAGFR=round(str_replace("AAGvFR=","",$data),2);
 				}
 				else if(strpos($data,"AAWvCT=")!==false){
-					$AAWCT=str_replace("AAWvCT=","",$data);
+					$AAWCT=round(str_replace("AAWvCT=","",$data),2);
 				}
 				else if(strpos($data,"AAGvVF=")!==false){
-					$AAGVF=str_replace("AAGvVF=","",$data);
+					$AAGVF=round(str_replace("AAGvVF=","",$data),2);
 				}
 				else if(strpos($data,"AATvMP=")!==false){
-					$AATMP=str_replace("AATvMP=","",$data);
+					$AATMP=round(str_replace("AATvMP=","",$data),2);
 				}
 				else if(strpos($data,"AAPvRES=")!==false){
-					$AAPRES=str_replace("AAPvRES=","",$data);
+					$AAPRES=round(str_replace("AAPvRES=","",$data),2);
 				}
 				else if(strpos($data,"AAIvPRES=")!==false){
-					$AAIPRES=str_replace("AAIvPRES=","",$data);
+					$AAIPRES=round(str_replace("AAIvPRES=","",$data),2);
 				}
 				else if(strpos($data,"AAOPRvES=")!==false){
-					$AAOPRES=str_replace("AAOPRvES=","",$data);
+					$AAOPRES=round(str_replace("AAOPRvES=","",$data),2);
 				}
 				else if(strpos($data,"AAvGOR=")!==false){
 					$AAGOR=str_replace("AAvGOR=","",$data);
