@@ -5,6 +5,7 @@ from pymodbus.pdu import ModbusRequest
 from pymodbus.client.sync import ModbusSerialClient as ModbusClient #initialize a serial RTU client instance
 from pymodbus.transaction import ModbusRtuFramer
 import os
+import time
 #count= the number of registers to read
 #unit= the slave unit this request is targeting
 #address= the starting address to read from
@@ -24,9 +25,15 @@ while 1:
 	#Start DAU Testing
 	DAU_Start  = client.write_register(1, 0, unit=1)
 	print "DAU testing start"
-	#os.system('nohup python /home/pi/OSS/Python/SendData.py &')
+	time.sleep(70)
+	os.system('sudo python /home/pi/OSS/Python/SendData.py &')
     elif ( data == 'Command2\r\n'):
 	print "DAU testing stop"
-	DAU_Stop  = client.write_register(1, 1, unit=1)
-	os.system('pkill -9 -f /home/pi/OSS/Python/SendData.py')
+	while 1:
+	 	with open('flag.txt', 'r+') as f:
+                	text = f.read()
+                	if (text == '0'):
+				DAU_Stop  = client.write_register(1, 1, unit=1)
+				os.system('sudo pkill -9 -f /home/pi/OSS/Python/SendData.py')
+                        	break;
 
