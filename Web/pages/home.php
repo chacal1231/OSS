@@ -112,6 +112,51 @@ window.onload = function () {
                 setInterval(function () {
                     updateChart()
                 }, updateInterval);
+
+                //Chart 2
+
+                var dataLength = 0;
+                var data = [];
+                var updateInterval = 500;
+                updateChart();
+                function updateChart() {
+                    $.getJSON("pages/jsonchar.php", function (result) {
+                        if (dataLength !== result.length) {
+                            for (var i = dataLength; i < result.length; i++) {
+                                data.push({
+                                    label: (result[i].valorx),
+                                    y: parseInt(result[i].valory)
+                                });
+                            }
+                            dataLength = result.length;
+                            chart.render();
+                        }
+                    });
+                }
+                var chart = new CanvasJS.Chart("chart2", {
+                    zoomEnabled: true,
+                    title: {
+                        text: "Process Temperature"
+                    },
+                    axisX: {
+                        title: "chart updates every " + 60 + " secs"
+                    },
+                    axisY: {
+                        title: "Temperature",
+
+                        suffix: " °C",
+
+                    },
+                    data: [{type: "line",
+                            toolTipContent: "{label} : {y} °C",
+                             lineColor: "red", 
+                            dataPoints: data}],
+                });
+                setInterval(function () {
+                    updateChart()
+                }, updateInterval);
+
+
 }
 </script>
 </head>
@@ -129,10 +174,12 @@ window.onload = function () {
         <div class="col-sm-6">
         <section class="panel">
             <header class="panel-heading">
-                Nivel de pH en el agua
+                Oil Flow rate 
             </header>
             <div class="panel-body"> 
                 <div class="table-responsive">
+                    <div id="chart2" style="height: 370px; max-width: 920px; margin: 0px auto;""></div>
+                    <script src="backend/js/canvasjs.min.js"></script>
                     </table>
                     </div>
                     </div>
