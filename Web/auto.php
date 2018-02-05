@@ -172,10 +172,11 @@ while (true) {
             	// for that in our "elseif ($data)" line
 				echo "\r\n<p><strong>&middot;</strong> $socket wrote: $data</p>";
 				
-				if(strpos($data,"timeS")!==false){
-				$x=date(s);
-				$s="Time now is=$x\r\n";
-				socket_write($socket, $s, strlen($s));
+				if(strpos($data,"xPython")!==false){
+				$s="PHP\r\n";
+					foreach($allSockets as $m){
+						socket_write($m, $s, strlen($s));
+					}
 				}
 				else if(strpos($data,"WID=")!==false){
 					$Wellid=str_replace("WID=","",$data);
@@ -207,6 +208,11 @@ while (true) {
 					$row_id=mysqli_fetch_array($query_id);
 					$id=($row_id['id']+1);
 					mysqli_query($link,"INSERT INTO minutedata(id,Datex,hour,wellid,LFR,WFR,OFR,GFR,TMP,PRE,WCUT) VALUES('$id','$Date','$Hour','$Wellid','$LFR', '$WFR', '$OFR', '$GFR', '$TMP', '$PRE', '$WCUT')");
+					//Echo menssage
+					$s="PHP\r\n";
+					foreach($allSockets as $m){
+						socket_write($m, $s, strlen($s));
+					}
 				}
 				#Accumulate RX Data
 				else if(strpos($data,"ALxFR=")!==false){
@@ -227,6 +233,11 @@ while (true) {
 					$row_id=mysqli_fetch_array($query_id);
 					$id=($row_id['id']+1);
 					mysqli_query($link,"INSERT INTO accdata(id,date,hour,wellid,ALFR,AWFR,AOFR,AGFR) VALUES('$id','$Date','$Hour','$Wellid','$ALFR', '$AWFR', '$AOFR', '$AGFR')");
+					//Echo menssage
+					$s="PHP\r\n";
+					foreach($allSockets as $m){
+						socket_write($m, $s, strlen($s));
+					}
 				}
 
 				#Average RX data
@@ -265,10 +276,16 @@ while (true) {
 					$Date = date ('Y-m-d');
 					$Hour = date ('h:i:s');
 					//Query para ver el estado de la variable id
-					$query_id=mysqli_query($link,"SELECT id FROM accdata order by id DESC");
+					$query_id=mysqli_query($link,"SELECT id FROM avedata order by id DESC");
 					$row_id=mysqli_fetch_array($query_id);
 					$id=($row_id['id']+1);
-					mysqli_query($link,"INSERT INTO avedata(id,date,hour,wellid,AALFR,AAWFR,AAOFR,AAGFR,AAWCT,AAGVF,AATMP,AAPRES,AAIPRES,AAOPRES,AAGOR) VALUES('$Date','$Hour',$Wellid,'$AALFR', '$AAWFR', '$AAOFR', '$AAGFR', '$AAWCT', '$AAGVF', '$AATMP', '$AAPRES', '$AAIPRES', '$AAOPRES', '$AAGOR')");
+					mysqli_query($link,"INSERT INTO avedata(id,date,hour,wellid,AALFR,AAWFR,AAOFR,AAGFR,AAWCT,AAGVF,AATMP,AAPRES,AAIPRES,AAOPRES,AAGOR) VALUES('$id','$Date','$Hour','$Wellid','$AALFR', '$AAWFR', '$AAOFR', '$AAGFR', '$AAWCT', '$AAGVF', '$AATMP', '$AAPRES', '$AAIPRES', '$AAOPRES', '$AAGOR')");
+					//Echo menssage
+					$s="PHP\r\n";
+					foreach($allSockets as $m){
+						socket_write($m, $s, strlen($s));
+					}
+					
 				}
 				else if(strpos($data,"C=1")!==false){
 					$s="Command1\r\n";
