@@ -177,6 +177,9 @@ while (true) {
 				$s="Time now is=$x\r\n";
 				socket_write($socket, $s, strlen($s));
 				}
+				else if(strpos($data,"WID=")!==false){
+					$Wellid=str_replace("WID=","",$data);
+				}
 				else if(strpos($data,"LFR=")!==false){
 					$LFR=str_replace("LFR=","",$data);
 				}
@@ -199,7 +202,11 @@ while (true) {
 					$WCUT=str_replace("WCUT=","",$data);
 					$Date = date ('Y-m-d');
 					$Hour = date ('h:i:s');
-					mysqli_query($link,"INSERT INTO minutedata(Datex,hour,LFR,WFR,OFR,GFR,TMP,PRE,WCUT) VALUES('$Date','$Hour','$LFR', '$WFR', '$OFR', '$GFR', '$TMP', '$PRE', '$WCUT')");
+					//Query para ver el estado de la variable id
+					$query_id=mysqli_query($link,"SELECT id FROM minutedata order by id DESC");
+					$row_id=mysqli_fetch_array($query_id);
+					$id=($row_id['id']+1);
+					mysqli_query($link,"INSERT INTO minutedata(id,Datex,hour,wellid,LFR,WFR,OFR,GFR,TMP,PRE,WCUT) VALUES('$id','$Date','$Hour','$Wellid','$LFR', '$WFR', '$OFR', '$GFR', '$TMP', '$PRE', '$WCUT')");
 				}
 				#Accumulate RX Data
 				else if(strpos($data,"ALxFR=")!==false){
@@ -215,7 +222,11 @@ while (true) {
 					$AGFR=str_replace("AGxFR=","",$data);
 					$Date = date ('Y-m-d');
 					$Hour = date ('h:i:s');
-					mysqli_query($link,"INSERT INTO accdata(date,hour,ALFR,AWFR,AOFR,AGFR) VALUES('$Date','$Hour','$ALFR', '$AWFR', '$AOFR', '$AGFR')");
+					//Query para ver el estado de la variable id
+					$query_id=mysqli_query($link,"SELECT id FROM accdata order by id DESC");
+					$row_id=mysqli_fetch_array($query_id);
+					$id=($row_id['id']+1);
+					mysqli_query($link,"INSERT INTO accdata(id,date,hour,wellid,ALFR,AWFR,AOFR,AGFR) VALUES('$id','$Date','$Hour','$Wellid','$ALFR', '$AWFR', '$AOFR', '$AGFR')");
 				}
 
 				#Average RX data
@@ -253,7 +264,11 @@ while (true) {
 					$AAGOR=str_replace("AAvGOR=","",$data);
 					$Date = date ('Y-m-d');
 					$Hour = date ('h:i:s');
-					mysqli_query($link,"INSERT INTO avedata(date,hour,AALFR,AAWFR,AAOFR,AAGFR,AAWCT,AAGVF,AATMP,AAPRES,AAIPRES,AAOPRES,AAGOR) VALUES('$Date','$Hour','$AALFR', '$AAWFR', '$AAOFR', '$AAGFR', '$AAWCT', '$AAGVF', '$AATMP', '$AAPRES', '$AAIPRES', '$AAOPRES', '$AAGOR')");
+					//Query para ver el estado de la variable id
+					$query_id=mysqli_query($link,"SELECT id FROM accdata order by id DESC");
+					$row_id=mysqli_fetch_array($query_id);
+					$id=($row_id['id']+1);
+					mysqli_query($link,"INSERT INTO avedata(id,date,hour,wellid,AALFR,AAWFR,AAOFR,AAGFR,AAWCT,AAGVF,AATMP,AAPRES,AAIPRES,AAOPRES,AAGOR) VALUES('$Date','$Hour',$Wellid,'$AALFR', '$AAWFR', '$AAOFR', '$AAGFR', '$AAWCT', '$AAGVF', '$AATMP', '$AAPRES', '$AAIPRES', '$AAOPRES', '$AAGOR')");
 				}
 				else if(strpos($data,"C=1")!==false){
 					$s="Command1\r\n";
