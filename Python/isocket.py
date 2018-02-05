@@ -30,7 +30,7 @@ while 1:
     elif ( data == 'Command2\r\n'):
 	print "DAU testing stop"
 	while 1:
-	 	with open('flag.txt', 'r+') as f:
+	 	with open('/home/pi/OSS/Python/flag.txt', 'r+') as f:
                 	text = f.read()
                 	if (text == '0'):
 				DAU_Stop  = client.write_register(1, 1, unit=1)

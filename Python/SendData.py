@@ -14,7 +14,7 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect(('181.129.168.242', 7774))
 while 1:
 	#Flag UP
-	with open('flag.txt', 'r+') as f:
+	with open('/home/pi/OSS/Python/flag.txt', 'r+') as f:
 		f.write('1')
 		f.close()
 	#Connect to Master Modbus every loop
@@ -180,7 +180,7 @@ while 1:
 	#Close client every loop
 	client.close()
 	#Flag down
-	with open('flag.txt', 'r+') as f:
+	with open('/home/pi/OSS/Python/flag.txt', 'r+') as f:
                 f.write('0')
                 f.close()
 	#Wait 60 seconds to do loop
