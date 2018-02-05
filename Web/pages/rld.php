@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
 <?php
-$result=mysqli_query($link,"SELECT * FROM minutedata ORDER BY hour DESC");
+$result=mysqli_query($link,"SELECT * FROM minutedata ORDER BY id DESC");
 $row=mysqli_fetch_array($result);
 ?>
 
