@@ -2,19 +2,19 @@
 <?php
 $Date = date ('Y-m-d');
 #Temperature query
-$TempQuery = mysqli_query($link,"SELECT TMP,hour from minutedata WHERE Datex='$Date' ORDER BY hour DESC");
+$TempQuery = mysqli_query($link,"SELECT TMP,id from minutedata WHERE Datex='$Date' ORDER BY id DESC");
 $TMP = mysqli_fetch_row($TempQuery);
 
 #Waterflow query
-$WaterQuery = mysqli_query($link,"SELECT WFR,hour FROM minutedata ORDER BY hour DESC");
+$WaterQuery = mysqli_query($link,"SELECT WFR,id FROM minutedata ORDER BY id DESC");
 $WFR = mysqli_fetch_row($WaterQuery);
 
 #OilFlow query
-$OilQuery = mysqli_query($link,"SELECT OFR,hour FROM minutedata ORDER BY hour DESC");
+$OilQuery = mysqli_query($link,"SELECT OFR,id FROM minutedata ORDER BY id DESC");
 $OFR = mysqli_fetch_row($OilQuery);
 
 #GasFlow query
-$GasQuery = mysqli_query($link,"SELECT GFR,hour FROM minutedata ORDER BY hour DESC");
+$GasQuery = mysqli_query($link,"SELECT GFR,id FROM minutedata ORDER BY id DESC");
 $GFR = mysqli_fetch_row($GasQuery);
 ?>
 
