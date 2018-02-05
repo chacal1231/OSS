@@ -268,7 +268,7 @@ while (true) {
 					$query_id=mysqli_query($link,"SELECT id FROM accdata order by id DESC");
 					$row_id=mysqli_fetch_array($query_id);
 					$id=($row_id['id']+1);
-					mysqli_query($link,"INSERT INTO avedata(id,date,hour,wellid,AALFR,AAWFR,AAOFR,AAGFR,AAWCT,AAGVF,AATMP,AAPRES,AAIPRES,AAOPRES,AAGOR) VALUES('$Date','$Hour',$Wellid,'$AALFR', '$AAWFR', '$AAOFR', '$AAGFR', '$AAWCT', '$AAGVF', '$AATMP', '$AAPRES', '$AAIPRES', '$AAOPRES', '$AAGOR')");
+					mysqli_query($link,"INSERT INTO avedata(id,date,hour,wellid,AALFR,AAWFR,AAOFR,AAGFR,AAWCT,AAGVF,AATMP,AAPRES,AAIPRES,AAOPRES,AAGOR) VALUES('$id','$Date','$Hour','$Wellid','$AALFR', '$AAWFR', '$AAOFR', '$AAGFR', '$AAWCT', '$AAGVF', '$AATMP', '$AAPRES', '$AAIPRES', '$AAOPRES', '$AAGOR')");
 				}
 				else if(strpos($data,"C=1")!==false){
 					$s="Command1\r\n";
