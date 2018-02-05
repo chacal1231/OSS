@@ -36,4 +36,8 @@ while 1:
 				DAU_Stop  = client.write_register(1, 1, unit=1)
 				os.system('sudo pkill -9 -f /home/pi/OSS/Python/SendData.py')
                         	break;
+	
+    elif ( data == 'PHP\r\n'):
+	client_socket.send('Python')
+	print "Test alive"
 
