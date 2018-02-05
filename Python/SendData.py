@@ -30,7 +30,6 @@ while 1:
 
         #WellId
         Wellid = "WID=" + str(TempsHG.registers[37])
-        print Wellid
         client_socket.send(Wellid)
     
     	#SendLFR
