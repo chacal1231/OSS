@@ -285,7 +285,6 @@ while (true) {
 					foreach($allSockets as $m){
 						socket_write($m, $s, strlen($s));
 					}
-					
 				}
 				else if(strpos($data,"C=1")!==false){
 					$s="Command1\r\n";
