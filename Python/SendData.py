@@ -24,6 +24,11 @@ while 1:
     	Dau_Status = "DAU_S=" + str(TempsHG.registers[1])
     	print Dau_Status
     	client_socket.send(Dau_Status)
+
+        #WellId
+        Wellid = "WID=" + str(TempsHG.registers[37])
+        print Wellid
+        client_socket.send(Wellid)
     
     	#SendLFR
 	DEC_LFR = [TempsHG.registers[14],TempsHG.registers[13]]
