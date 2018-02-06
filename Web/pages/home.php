@@ -2,19 +2,19 @@
 <?php
 $Date = date ('Y-m-d');
 #Temperature query
-$TempQuery = mysqli_query($link,"SELECT TMP,id from minutedata WHERE Datex='$Date' ORDER BY id DESC");
+$TempQuery = mysqli_query($link,"SELECT TMP,hour from minutedata WHERE Datex='$Date' ORDER BY hour DESC");
 $TMP = mysqli_fetch_row($TempQuery);
 
 #Waterflow query
-$WaterQuery = mysqli_query($link,"SELECT WFR,id FROM minutedata ORDER BY id DESC");
+$WaterQuery = mysqli_query($link,"SELECT WFR,hour FROM minutedata ORDER BY hour DESC");
 $WFR = mysqli_fetch_row($WaterQuery);
 
 #OilFlow query
-$OilQuery = mysqli_query($link,"SELECT OFR,id FROM minutedata ORDER BY id DESC");
+$OilQuery = mysqli_query($link,"SELECT OFR,hour FROM minutedata ORDER BY hour DESC");
 $OFR = mysqli_fetch_row($OilQuery);
 
 #GasFlow query
-$GasQuery = mysqli_query($link,"SELECT GFR,id FROM minutedata ORDER BY id DESC");
+$GasQuery = mysqli_query($link,"SELECT GFR,hour FROM minutedata ORDER BY hour DESC");
 $GFR = mysqli_fetch_row($GasQuery);
 ?>
 
@@ -82,11 +82,12 @@ window.onload = function () {
                             for (var i = dataLength; i < result.length; i++) {
                                 data.push({
                                     label: (result[i].valorx),
-                                    y: parseInt(result[i].valory)
+                                    y: parseFloat(result[i].valory)
                                 });
                             }
                             dataLength = result.length;
                             chart.render();
+
                         }
                     });
                 }
@@ -115,45 +116,46 @@ window.onload = function () {
 
                 //Chart 2
 
-                var dataLength = 0;
-                var data = [];
-                var updateInterval = 500;
-                updateChart();
-                function updateChart() {
-                    $.getJSON("pages/jsonchar.php", function (result) {
-                        if (dataLength !== result.length) {
-                            for (var i = dataLength; i < result.length; i++) {
-                                data.push({
-                                    label: (result[i].valorx),
-                                    y: parseInt(result[i].valory)
+                var dataLength2 = 0;
+                var data2 = [];
+                var updateInterval2 = 500;
+                updateChart2();
+                function updateChart2() {
+                    $.getJSON("pages/jsoncharoil.php", function (result2) {
+                        if (dataLength2 !== result2.length) {
+                            for (var i = dataLength2; i < result2.length; i++) {
+                                data2.push({
+                                    label: (result2[i].valorx),
+                                    y: parseFloat(result2[i].valory)
                                 });
                             }
-                            dataLength = result.length;
-                            chart.render();
+                            dataLength2 = result2.length;
+                            chart2.render();
                         }
                     });
                 }
-                var chart = new CanvasJS.Chart("chart2", {
+                var chart2 = new CanvasJS.Chart("chart2", {
                     zoomEnabled: true,
                     title: {
-                        text: "Process Temperature"
+                        text: "Oil Flow Rate"
                     },
                     axisX: {
                         title: "chart updates every " + 60 + " secs"
                     },
                     axisY: {
-                        title: "Temperature",
+                        title: "Sm3/d",
 
-                        suffix: " °C",
+                        suffix: " Sm3/d",
 
                     },
                     data: [{type: "line",
-                            toolTipContent: "{label} : {y} °C",
+                             toolTipContent: "{label} : {y} Sm3/d",
                              lineColor: "red", 
-                            dataPoints: data}],
+
+                            dataPoints: data2}],
                 });
                 setInterval(function () {
-                    updateChart()
+                    updateChart2()
                 }, updateInterval);
 
 
