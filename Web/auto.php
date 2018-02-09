@@ -193,6 +193,9 @@ while (true) {
 				else if(strpos($data,"GFR=")!==false){
 					$GFR=str_replace("GFR=","",$data);
 				}
+				else if(strpos($data,"GVF=")!==false){
+					$GVF=str_replace("GVF=","",$data);
+				}
 				else if(strpos($data,"TMP=")!==false){
 					$TMP=str_replace("TMP=","",$data);
 				}
@@ -207,7 +210,7 @@ while (true) {
 					$query_id=mysqli_query($link,"SELECT id FROM minutedata order by id DESC");
 					$row_id=mysqli_fetch_array($query_id);
 					$id=($row_id['id']+1);
-					mysqli_query($link,"INSERT INTO minutedata(id,Datex,hour,wellid,LFR,WFR,OFR,GFR,TMP,PRE,WCUT) VALUES('$id','$Date','$Hour','$Wellid','$LFR', '$WFR', '$OFR', '$GFR', '$TMP', '$PRE', '$WCUT')");
+					mysqli_query($link,"INSERT INTO minutedata(id,Datex,hour,wellid,LFR,WFR,OFR,GFR,GVF,TMP,PRE,WCUT) VALUES('$id','$Date','$Hour','$Wellid','$LFR', '$WFR', '$OFR', '$GFR','$GVF', '$TMP', '$PRE', '$WCUT')");
 					//Echo menssage
 					$s="PHP\r\n";
 					foreach($allSockets as $m){
