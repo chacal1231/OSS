@@ -2,7 +2,7 @@
 <?php
 $Date = date ('Y-m-d');
 #Temperature query
-$TempQuery = mysqli_query($link,"SELECT TMP,hour from minutedata WHERE Datex='$Date' ORDER BY hour DESC");
+$TempQuery = mysqli_query($link,"SELECT TMP,hour from minutedata ORDER BY hour DESC");
 $TMP = mysqli_fetch_row($TempQuery);
 
 #Waterflow query
