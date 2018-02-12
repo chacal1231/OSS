@@ -1,4 +1,3 @@
-<script type="text/javascript" src="http://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
 <?php
 $Date = date ('Y-m-d');
 #Temperature query
@@ -59,6 +58,86 @@ $GFR = mysqli_fetch_row($GasQuery);
     </div>
 </div>
  <div class="row">
+     <div class="col-sm-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Testing status 
+            </header>
+            <section class="panel">
+                        <div class="panel-body"> 
+                            <td ><a target="_blank" href="pages/Enviar.php?c=1" class="btn btn-success">Start testing</a></td>
+                            <td ><a target="_blank" href="pages/Enviar.php?c=1" class="btn btn-danger">Stop testing</a></td>
+                            <hr/>
+                            <head>
+                            <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+                            <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+                            <script type="text/javascript" language="javascript" >
+                            $(document).ready(function() {
+                                var dataTable = $('#employee-grid').DataTable( {
+                                    "processing": true,
+                                    "serverSide": true,
+                                    "searching": false,
+                                    "responsive": true,
+                                    "columnDefs": [
+                                    { className: "dt-body-center", "targets": [ 0 ] }
+                                    ],
+                                    "ajax":{
+                                    url :"data.php", // json datasource
+                                    type: "post",  // method  , by default get
+                                    error: function(){  // error handling
+                                        $(".employee-grid-error").html("");
+                                        $("#employee-grid").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
+                                        $("#employee-grid_processing").css("display","none");
+                                    }
+                                }
+                            } );
+                                setInterval( function () {
+                                    dataTable.ajax.reload();
+                                }, 60000 );
+                            } );
+                        </script>
+                        <style>
+                        div.container {
+                            margin: 0 auto;
+                            max-width:990px;
+                        }
+                        div.header {
+                            margin: 100px auto;
+                            line-height:30px;
+                            max-width:990px;
+                        }
+                        body {
+                            background: #f7f7f7;
+                            color: #333;
+                            font: 90%/1.45em "Helvetica Neue",HelveticaNeue,Verdana,Arial,Helvetica,sans-serif;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="table-responsive"> 
+                            <table id="employee-grid" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dt-responsive nowrap">
+                            <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Hour</th>
+                                <th>LiquidFlow (Sm3/d)</th>
+                                <th>OilFlow</th>
+                                <th>GasFlow</th>
+                                <th>WC</th>
+                                <th>GVF</th>
+                                <th>Temp</th>
+                                <th>Pressure</th>
+                            </tr>
+                        </thead>
+                        </div>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
     <div class="col-sm-6">
         <section class="panel">
             <header class="panel-heading">

@@ -16,9 +16,7 @@
     <link href="backend/panel/font-awesome/css/font-awesome.css" rel="stylesheet" />
 
     <!--dynamic table-->
-    <link href="backend/panel/js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
-    <link href="backend/panel/js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
-    <link rel="stylesheet" href="backend/panel/js/data-tables/DT_bootstrap.css" />
+   
 
     <!--datetimepicker table-->
     <link rel="stylesheet" href="backend/css/datepicker.min.css">
