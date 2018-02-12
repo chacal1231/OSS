@@ -135,7 +135,7 @@
                             <li>
                                 <a href="index.php">
                                     <i class="fa fa-dashboard"></i>
-                                    <span>Oilfield Services & Supplies S.A.S</span>
+                                    <span>OSS S.A.S</span>
                                 </a>
                             </li>
                             <li class="sub-menu">
@@ -144,10 +144,8 @@
                                     <span>Dashboard</span>
                                 </a>
                                 <ul class="sub">
-									<li><a href="?page=Enviar">Send coomands to DAU</a></li>
-                                    <li><a href="?page=rld">Realtime data</a></li>
-                                    <li><a href="?page=avd">Average data</a></li>
-                                    <li><a href="?page=acd">Acumulated data</a></li> 
+                                    <li><a href="?page=acd">Export data</a></li>
+                                    <li><a href="?page=acd">Export report</a></li> 
                                 </ul>
                             </li>
 

@@ -40,7 +40,7 @@ socket_close($socket);
 // clean up result
 //$result = trim($result);
 //$result = substr($result, 0, strlen($result)-1);
-} 
+}else
 $Date = date ('Y-m-d');
 #Temperature query
 $TempQuery = mysqli_query($link,"SELECT TMP,hour from minutedata ORDER BY hour DESC");
@@ -103,7 +103,7 @@ $GFR = mysqli_fetch_row($GasQuery);
      <div class="col-sm-12">
         <section class="panel">
             <header class="panel-heading">
-                Testing status 
+                Testing status: 
             </header>
             <section class="panel">
                         <div class="panel-body"> 
@@ -137,7 +137,7 @@ $GFR = mysqli_fetch_row($GasQuery);
                             } );
                                 setInterval( function () {
                                     dataTable.ajax.reload();
-                                }, 60000 );
+                                }, 50000 );
                             } );
                         </script>
                         <style>
@@ -286,7 +286,7 @@ window.onload = function () {
 </script>
 </head>
 <body>
-<div id="chart" style="height: 370px; max-width: 920px; margin: 0px auto;""></div>
+<div id="chart" style="height: 350px; max-width: 920px; margin: 0px auto;""></div>
 <script src="backend/js/canvasjs.min.js"></script>
 </body>
 </html>     
