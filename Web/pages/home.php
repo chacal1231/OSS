@@ -1,4 +1,46 @@
 <?php
+if (isset($_POST['dau'])) {
+    if($_POST['dau']=='Start'){
+        $Command = '1';
+        echo '<div class="alert alert-success" role="alert">
+                    <button type="button" font size="10" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     <strong>Testing is now starting, wait 60s for see the info.</div></strong>';
+    }elseif ($_POST['dau']=='Stop') {
+        $Command = '2';
+        echo '<div class="alert alert-success" role="alert">
+                    <button type="button" class="close" font size="10" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     <strong>Testing is now stop.</div></strong>';
+    }
+
+$host="127.0.0.1";
+$port = 7774;
+//echo $Command;
+$message="C=". $Command . "\r\n";
+ 
+// create socket
+$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die("Could not create socket\n");
+ 
+// connect to server
+$result = socket_connect($socket, $host, $port) or die("Could not connect to server\n");
+ 
+//socket_read ($socket, 1024) or die("Could not read server response\n");
+ 
+// send string to server
+socket_write($socket, $message, strlen($message)) or die("Could not send data to server\n");
+ 
+// get server response
+//$result = socket_read ($socket, 1024) or die("Could not read server response\n");
+ 
+// end session
+//socket_write($socket, "exit", 3) or die("Could not end session\n");
+ 
+// close socket
+socket_close($socket);
+ 
+// clean up result
+//$result = trim($result);
+//$result = substr($result, 0, strlen($result)-1);
+} 
 $Date = date ('Y-m-d');
 #Temperature query
 $TempQuery = mysqli_query($link,"SELECT TMP,hour from minutedata ORDER BY hour DESC");
@@ -65,8 +107,10 @@ $GFR = mysqli_fetch_row($GasQuery);
             </header>
             <section class="panel">
                         <div class="panel-body"> 
-                            <td ><a target="_blank" href="pages/Enviar.php?c=1" class="btn btn-success">Start testing</a></td>
-                            <td ><a target="_blank" href="pages/Enviar.php?c=1" class="btn btn-danger">Stop testing</a></td>
+                            <form action="" method="post">
+                            <input id='submit_tea'  class="btn btn-success"  type='submit' name = 'dau' value = 'Start' />
+                            <input id='submit_tea'  class="btn btn-danger"  type='submit' name = 'dau' value = 'Stop' />
+                            </form>
                             <hr/>
                             <head>
                             <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
