@@ -1,8 +1,8 @@
 <?php
-
+include '../inc/config.php';
 header('Content-Type: application/json');
 
-$con = mysqli_connect("127.0.0.1","root","2*b**:E82JZ=93L|c0Tw","auto");
+$con = $link;
 
 // Check connection
 if (mysqli_connect_errno($con))
