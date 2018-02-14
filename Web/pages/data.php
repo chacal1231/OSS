@@ -2,8 +2,8 @@
 /* Database connection start */
 $servername = "localhost";
 $username = "root";
-$password = "2*b**:E82JZ=93L|c0Tw";
-$dbname = "auto";
+$password = "jesus00";
+$dbname = "oss";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
 

@@ -71,7 +71,10 @@
 <script src="backend/panel/js/flot-chart/jquery.flot.pie.resize.js"></script>
 
 <!--dynamic table-->
-<script type="text/javascript" src="backend/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="pages/css/jquery.dataTables.css">
+<script type="text/javascript" language="javascript" src="pages/js/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="pages/js/jquery.dataTables.js"></script>
+<script type="text/javascript" language="javascript" src="pages/js/dataTables.scroller.js"></script>
 
 <script src="backend/plugin/fp/bootstrap-fileupload.js"></script>
 
