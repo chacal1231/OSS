@@ -71,12 +71,7 @@
 <script src="backend/panel/js/flot-chart/jquery.flot.pie.resize.js"></script>
 
 <!--dynamic table-->
- 
 <script type="text/javascript" src="backend/js/jquery.dataTables.js"></script>
-<!--common script init for all pages-->
-
-<!--dynamic table initialization -->
-<script src="backend/panel/js/dynamic_table_init.js"></script>
 
 <script src="backend/plugin/fp/bootstrap-fileupload.js"></script>
 

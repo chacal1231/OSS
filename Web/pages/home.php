@@ -113,9 +113,8 @@ $GFR = mysqli_fetch_row($GasQuery);
                             </form>
                             <hr/>
                             <head>
-                            <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
-                            <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
-                            <script type="text/javascript" language="javascript" >
+			    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+			    <script type="text/javascript" language="javascript" >
                             $(document).ready(function() {
                                 var dataTable = $('#employee-grid').DataTable( {
                                     "processing": true,
