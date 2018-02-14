@@ -1,11 +1,7 @@
 <?php
 /* Database connection start */
-$servername = "localhost";
-$username = "root";
-$password = "2*b**:E82JZ=93L|c0Tw";
-$dbname = "auto";
-
-$conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
+include 'inc/config.php';
+$conn = $link;
 
 /* Database connection end */
 
