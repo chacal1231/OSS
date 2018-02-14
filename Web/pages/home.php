@@ -5,11 +5,38 @@ if (isset($_POST['dau'])) {
         echo '<div class="alert alert-success" role="alert">
                     <button type="button" font size="10" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                      <strong>Testing is now starting, wait 60s for see the info.</div></strong>';
+	$start_date = date('Y-m-d H:i:s');
+        //Query para ver el estado de la variable id
+        $query_id=mysqli_query($link,"SELECT * FROM testing ORDER BY id DESC");
+        $row_id=mysqli_fetch_array($query_id);
+        $id=($row_id['id']+1);
+        //Query ver ID testing
+        $Query_start_id=mysqli_query($link,"SELECT * FROM minutedata ORDER BY id DESC");
+        $Row_start=mysqli_fetch_row($Query_start_id);
+	if(is_null($result['column'])){
+		$start_id='1';	
+	}else{
+		$start_id=$Row_start['0'];
+	}
+        mysqli_query($link,"INSERT INTO testing(id,start,stop,start_id,stop_id) VALUES('$id','$start_date','0','$start_id','0')");
+	echo mysqli_error($link);
     }elseif ($_POST['dau']=='Stop') {
         $Command = '2';
         echo '<div class="alert alert-success" role="alert">
                     <button type="button" class="close" font size="10" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                      <strong>Testing is now stop.</div></strong>';
+	 //Query para ver el estado de la variable id
+        $query_id=mysqli_query($link,"SELECT * FROM testing ORDER BY id DESC");
+        $row_id=mysqli_fetch_array($query_id);
+        $id=($row_id['id']);
+	//Stop Date
+	$stop_date = date('Y-m-d H:i:s');
+	//Stop id
+	$Query_start_id=mysqli_query($link,"SELECT * FROM minutedata ORDER BY id DESC");
+        $Row_start=mysqli_fetch_row($Query_start_id);
+        $stop_id=$Row_start['0'];
+	mysqli_query($link,"UPDATE testing SET stop='$stop_date',stop_id='$stop_id' WHERE id='$id'");
+	echo mysqli_error($link);
     }
 
 $host="127.0.0.1";
