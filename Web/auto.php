@@ -1,10 +1,6 @@
 <?php
 //Configuración servidor Mysql
-$host = "localhost"; 
-$user = "root";
-$pass = "2*b**:E82JZ=93L|c0Tw"; 
-$database ="auto";
-$link=mysqli_connect($host,$user,$pass,$database);
+include 'inc/config.php';
 
 include (__DIR__.'/inc/smsGateway.php');
 require (__DIR__.'/inc/config.php');
