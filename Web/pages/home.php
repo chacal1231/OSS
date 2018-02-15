@@ -98,10 +98,18 @@ $GFR = mysqli_fetch_row($GasQuery);
         </section>
     </div>
 </div>
+<script src="backend/js/jquery.min.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+setInterval(function(){
+$("#status").load('pages/button.php')
+}, 20);
+});
+</script>
      <div class="col-sm-12">
         <section class="panel">
             <header class="panel-heading">
-                Testing status: 
+               <div id="status"></div>
             </header>
             <section class="panel">
                         <div class="panel-body"> 
@@ -112,9 +120,9 @@ $GFR = mysqli_fetch_row($GasQuery);
                             <hr/>
                             <head>
 	                    	<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
-		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
-		<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
-		<script type="text/javascript" language="javascript" src="js/dataTables.scroller.js"></script>
+		                      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+		                      <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
+		                      <script type="text/javascript" language="javascript" src="js/dataTables.scroller.js"></script>
 			    <script type="text/javascript" language="javascript" >
                             $(document).ready(function() {
                                 var dataTable = $('#employee-grid').DataTable( {
