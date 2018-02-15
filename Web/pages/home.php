@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
 <?php
 if (isset($_POST['dau'])) {
     if($_POST['dau']=='Start'){
@@ -103,7 +104,7 @@ $GFR = mysqli_fetch_row($GasQuery);
 $(document).ready(function(){
 setInterval(function(){
 $("#status").load('pages/button.php')
-}, 20);
+}, 1000);
 });
 </script>
      <div class="col-sm-12">
