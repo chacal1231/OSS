@@ -18,7 +18,7 @@ if (isset($_POST['dau'])) {
 	}else{
 		$start_id=$Row_start['0'];
 	}
-        mysqli_query($link,"INSERT INTO testing(id,start,stop,start_id,stop_id) VALUES('$id','$start_date','0','$start_id','0')");
+        mysqli_query($link,"INSERT INTO testing(id,start,stop,start_id,stop_id,status) VALUES('$id','$start_date','0','$start_id','0','1')");
 	echo mysqli_error($link);
     }elseif ($_POST['dau']=='Stop') {
         $Command = '2';
@@ -35,7 +35,7 @@ if (isset($_POST['dau'])) {
 	$Query_start_id=mysqli_query($link,"SELECT * FROM minutedata ORDER BY id DESC");
         $Row_start=mysqli_fetch_row($Query_start_id);
         $stop_id=$Row_start['0'];
-	mysqli_query($link,"UPDATE testing SET stop='$stop_date',stop_id='$stop_id' WHERE id='$id'");
+	mysqli_query($link,"UPDATE testing SET stop='$stop_date',stop_id='$stop_id',status='0' WHERE id='$id'");
 	echo mysqli_error($link);
     }
 
@@ -45,15 +45,15 @@ $port = 7774;
 $message="C=". $Command . "\r\n";
  
 // create socket
-$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die("Could not create socket\n");
+$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die("Could not create socket try again\n");
  
 // connect to server
-$result = socket_connect($socket, $host, $port) or die("Could not connect to server\n");
+$result = socket_connect($socket, $host, $port) or die("Could not connect to server try again\n");
  
 //socket_read ($socket, 1024) or die("Could not read server response\n");
  
 // send string to server
-socket_write($socket, $message, strlen($message)) or die("Could not send data to server\n");
+socket_write($socket, $message, strlen($message)) or die("Could not send data to server try again\n");
  
 // get server response
 //$result = socket_read ($socket, 1024) or die("Could not read server response\n");
