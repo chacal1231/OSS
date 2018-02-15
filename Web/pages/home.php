@@ -85,48 +85,19 @@ $OFR = mysqli_fetch_row($OilQuery);
 $GasQuery = mysqli_query($link,"SELECT GFR,hour FROM minutedata ORDER BY hour DESC");
 $GFR = mysqli_fetch_row($GasQuery);
 ?>
-
-<div class="row">
-    <div class="col-md-3">
-        <div class="mini-stat clearfix">
-            <font size="1"><b>Process Temp</b></font>
-            <span class="mini-stat-icon green"><i class="fa fa-thermometer-half"></i></span>
-            <div class="mini-stat-info">
-               <button type="button" class="btn btn-danger btn-xs"><?=$TMP[0]?> °C</button><font size="2"></font><br>
-                </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="mini-stat clearfix">
-            <font size="1"><b>WaterFlow</b></font>
-            <span class="mini-stat-icon tar"><i class="fa fa-shower"></i></span>
-            <div class="mini-stat-info">
-                <button type="button" class="btn btn-info btn-xs"><?=$WFR[0]?> </button><font size="2"> (Sm3/d)</font><br>
-             
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="mini-stat clearfix">
-            <font size="1"><b>OilFlow</b></font> 
-            <span class="mini-stat-icon pink"><i class="fa fa-tint"></i></span>
-            <div class="mini-stat-info">
-            <button type="button" class="btn btn-info btn-xs"><?=$OFR[0]?></button><font size="2"> (Sm3/d)</font><br>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="mini-stat clearfix">
-            <font size="1"><b>GasFlow</b></font>
-            <span class="mini-stat-icon green"><i class="fa fa-soundcloud"></i></span>
-            <div class="mini-stat-info">
-                <button type="button" class="btn btn-info btn-xs"><?=$GFR[0]?></button><font size="2"> (Sm3/d)</font>
-                <br>
-            </div>
-        </div>
+ <div class="row">
+  <div class="col-sm-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Testing historial
+            </header>
+            <section class="panel">
+                        <div class="panel-body"> 
+                        </div>
+            </section>
+        </section>
     </div>
 </div>
- <div class="row">
      <div class="col-sm-12">
         <section class="panel">
             <header class="panel-heading">
@@ -334,9 +305,9 @@ window.onload = function () {
                 <div class="table-responsive">
                     <div id="chart2" style="height: 370px; max-width: 920px; margin: 0px auto;""></div>
                     <script src="backend/js/canvasjs.min.js"></script>
-                    </table>
-                    </div>
-                    </div>
-                    </section>
-                    </div>
-                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
