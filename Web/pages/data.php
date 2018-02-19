@@ -1,11 +1,8 @@
 <?php
 /* Database connection start */
-$servername = "localhost";
-$username = "root";
-$password = "jesus00";
-$dbname = "oss";
+require('../inc/config.php');
 
-$conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
+$conn = $link;
 
 /* Database connection end */
 
