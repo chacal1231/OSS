@@ -251,7 +251,7 @@ $pdf->Cell( 0, 10, "HAIMO MPFM", 0, 0, 'C' );
 $pdf->Ln(6);
 $pdf->Cell( 0, 10, "DATA POR MINUTO", 0, 0, 'C' );
 $pdf->Ln(15);
-$pdf->SetFont( 'Arial', '', 6 );
+$pdf->SetFont( 'Arial', 'B', 7 );
 $pdf -> SetX(17);
 $pdf->Cell( '20', 8, utf8_decode("Tiempo"), 1, 0, 'C', true );
 $pdf->Cell( '20', 8, utf8_decode("Líquido (SBPD)"), 1, 0, 'C', true );
@@ -264,6 +264,7 @@ $pdf->Cell( '30', 8, utf8_decode("Temperatura (°F)"), 1, 0, 'C', true );
 $pdf->Cell( '20', 8, utf8_decode("Pres (PSI)"), 1, 0, 'C', true );
 $pdf->Ln(8);
 $i=0;
+$pdf->SetFont( 'Arial', '', 6 );
 $Query = mysqli_query($link,"SELECT * FROM minutedata ORDER BY id DESC");
 while($Row = mysqli_fetch_array($Query)){
   $pdf -> SetX(17);
