@@ -48,7 +48,6 @@ while($usuarios2 = mysqli_fetch_array($usuarios)){
 	$pdf->Cell(20, 8, $usuarios2['OFR'], 0);
 	$pdf->Cell(30, 8, $usuarios2['GVF'], 0);
 	$pdf->Cell(25, 8, $usuarios2['TMP'], 0);
-	$pdf->Ln(8);
 }
 $pdf->SetFont('Arial', 'B', 8);
 $pdf->Output();
