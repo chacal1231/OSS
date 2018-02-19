@@ -67,6 +67,7 @@ $logoWidth = 110;
 **/
 
 $pdf = new FPDF( 'P', 'mm', 'A4' );
+$pdf->SetAutoPageBreak(true,10);
 $pdf->SetTextColor( $textColour[0], $textColour[1], $textColour[2] );
 $pdf->AddPage();
 $pdf->SetTitle("Reporte $Nom $date");
@@ -243,6 +244,8 @@ $pdf -> SetX(131);
 $pdf->SetFont( 'Arial', '', 8 );
 $pdf->Write( 6, utf8_decode("$CLI") );
 
+//Minute data table
+
 $pdf->AddPage();
 $pdf->SetTextColor( $headerColour[0], $headerColour[1], $headerColour[2] );
 $pdf->SetFont( 'Arial', 'B', 17 );
@@ -250,6 +253,46 @@ $pdf->Image('../backend/panel/images/logo.png' , 10 ,8, 40 , 20,'PNG');
 $pdf->Cell( 0, 10, "HAIMO MPFM", 0, 0, 'C' );
 $pdf->Ln(6);
 $pdf->Cell( 0, 10, "DATA POR MINUTO", 0, 0, 'C' );
+$pdf->Ln(15);
+$pdf->SetFont( 'Arial', 'B', 7 );
+$pdf -> SetX(17);
+$pdf->Cell( '20', 8, utf8_decode("Tiempo"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("Líquido (SBPD)"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("Crudo (SBPD)"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("Agua (SBPD)"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("Gas (SBPD)"), 1, 0, 'C', true );
+$pdf->Cell( '10', 8, utf8_decode("WC (%)"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("GVF (%)"), 1, 0, 'C', true );
+$pdf->Cell( '30', 8, utf8_decode("Temperatura (°F)"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("Pres (PSI)"), 1, 0, 'C', true );
+$pdf->Ln(8);
+$i=0;
+$pdf->SetFont( 'Arial', '', 6 );
+$Query = mysqli_query($link,"SELECT * FROM minutedata ORDER BY id DESC");
+while($Row = mysqli_fetch_array($Query)){
+  $pdf -> SetX(17);
+  $pdf->Cell( '20', 8, $Row['hour'] , 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, $Row['LFR'], 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, $Row['OFR'], 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, $Row['WFR'], 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, $Row['GFR'], 1, 0, 'C', false );
+  $pdf->Cell( '10', 8, $Row['WCUT'], 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, $Row['GVF'], 1, 0, 'C', false );
+  $pdf->Cell( '30', 8, $Row['TMP'], 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, $Row['PRE'], 1, 0, 'C', false );
+  $pdf->Ln(8);
+  $i++;
+}
+
+//Hour Data Table
+
+$pdf->AddPage();
+$pdf->SetTextColor( $headerColour[0], $headerColour[1], $headerColour[2] );
+$pdf->SetFont( 'Arial', 'B', 17 );
+$pdf->Image('../backend/panel/images/logo.png' , 10 ,8, 40 , 20,'PNG');
+$pdf->Cell( 0, 10, "HAIMO MPFM", 0, 0, 'C' );
+$pdf->Ln(6);
+$pdf->Cell( 0, 10, "DATA POR HORA", 0, 0, 'C' );
 $pdf->Ln(15);
 $pdf->SetFont( 'Arial', 'B', 7 );
 $pdf -> SetX(17);
