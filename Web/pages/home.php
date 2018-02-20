@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
 <?php
 if (isset($_POST['dau'])) {
     if($_POST['dau']=='Start'){
@@ -34,9 +33,9 @@ if (isset($_POST['dau'])) {
 	$stop_date = date('Y-m-d H:i:s');
 	//Stop id
 	$Query_start_id=mysqli_query($link,"SELECT * FROM minutedata ORDER BY id DESC");
-    $Row_start=mysqli_fetch_row($Query_start_id);
-    $stop_id=$Row_start['0'];
-    $Duration = round(abs($row_id['start'] - $stop_date) / 60,2);
+    	$Row_start=mysqli_fetch_row($Query_start_id);
+    	$stop_id=$Row_start['0'];
+    	$Duration = round(abs(strtotime($row_id['start']) - strtotime($stop_date)) / 60);
     //Query
 	mysqli_query($link,"UPDATE testing SET stop='$stop_date',stop_id='$stop_id',status='0',duration='$Duration' WHERE id='$id'");
 	echo mysqli_error($link);
