@@ -169,7 +169,7 @@ $pdf->SetTextColor( $tableHeaderTopProductTextColour[0], $tableHeaderTopProductT
 $pdf->SetFillColor( $tableHeaderTopProductFillColour[0], $tableHeaderTopProductFillColour[1], $tableHeaderTopProductFillColour[2] );
 
 //Cells
-$pdf->Cell( 45, 5, utf8_decode("Densidad del agua @60°F(kg/m3"), 1, 0, 'C', true );
+$pdf->Cell( 45, 5, utf8_decode("Densidad del agua @60°F(kg/m3)"), 1, 0, 'C', true );
 $pdf->Cell( 45, 5, utf8_decode("Crudo API@60°F"), 1, 0, 'C', true );
 $pdf->Cell( 45, 5, utf8_decode("Gr @60°F(14.7psi)"), 1, 0, 'C', true );
 $pdf -> SetX(180); 
