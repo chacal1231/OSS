@@ -75,6 +75,7 @@
 <script type="text/javascript" language="javascript" src="pages/js/jquery.js"></script>
 <script type="text/javascript" language="javascript" src="pages/js/jquery.dataTables.js"></script>
 <script type="text/javascript" language="javascript" src="pages/js/dataTables.scroller.js"></script>
+<script src="backend/panel/js/dynamic_table_init.js"></script>
 
 <script src="backend/plugin/fp/bootstrap-fileupload.js"></script>
 
