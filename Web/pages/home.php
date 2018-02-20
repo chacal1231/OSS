@@ -85,6 +85,9 @@ $OFR = mysqli_fetch_row($OilQuery);
 #GasFlow query
 $GasQuery = mysqli_query($link,"SELECT GFR,hour FROM minutedata ORDER BY hour DESC");
 $GFR = mysqli_fetch_row($GasQuery);
+
+$result=mysqli_query($link,"SELECT * FROM testing ORDER BY id DESC");
+
 ?>
  <div class="row">
   <div class="col-sm-12">
@@ -93,7 +96,34 @@ $GFR = mysqli_fetch_row($GasQuery);
                 Testing historial
             </header>
             <section class="panel">
-                        <div class="panel-body"> 
+                        <div class="panel-body">
+                         <div class="table-responsive">
+                                <table  class="display table table-bordered table-striped" id="dynamic-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Start testing</th>
+                                            <th>Stop testing</th>
+                                            <th>Duration</th>
+                                            <th><i class="fa fa-eye"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach( $result as $row => $field ) : ?> <!-- Mulai loop -->
+                                        <tr class="text-besar">
+                                            <td><?php echo $field['id']; ?></td>
+                                            <td><?php echo $field['start']; ?></td>
+                                            <td><?php echo $field['stop']; ?></td>
+                                            <td><?php echo $field['status']; ?></td>
+                                            <td>
+                                                <a class="btn btn-success btn-xs" href="?page=eli_activo&id=<?php echo $field['id']; ?>" title="Ver reporte">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+</td>
+                                        </tr>
+                                        <?php endforeach; ?> <!-- Selesai loop -->                                  
+                                    </tbody>
+</table>
                         </div>
             </section>
         </section>
