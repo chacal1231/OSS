@@ -35,7 +35,7 @@ $DU     =   utf8_decode($Row_Data['duration']);
 $OSS    =   utf8_decode($Row_Data['OSS']);
 $CLI    =   utf8_decode($Row_Data['CL']);
 //MPFM data
-$Query_MPFM   = mysqli_query($link,"SELECT AVG(LFR) AS LFR, AVG(OFR) AS OFR, AVG(WFR) AS WFR, AVG(GFR) AS GFR, AVG(WCUT) AS WCUT, AVG(GVF) AS GVF, AVG(TMP) AS TMP, AVG(PRE) AS PRE FROM minutedata WHERE id > $Row_Data[start_id] AND id <= $Row_Data[stop_id]");
+$Query_MPFM   = mysqli_query($link,"SELECT AVG(LFR) AS LFR, AVG(OFR) AS OFR, AVG(WFR) AS WFR, AVG(GFR) AS GFR, AVG(WCUT) AS WCUT, AVG(GVF) AS GVF, AVG(TMP) AS TMP, AVG(PRE) AS PRE FROM minutedata WHERE id >= $Row_Data[start_id] AND id < $Row_Data[stop_id]");
 $Row_MPFM     = mysqli_fetch_array($Query_MPFM);
 $LT     =   round($Row_MPFM['LFR'],2);
 $WC     =   round($Row_MPFM['WCT'],2);
@@ -275,7 +275,7 @@ $pdf->Cell( '20', 8, utf8_decode("Pres (PSI)"), 1, 0, 'C', true );
 $pdf->Ln(8);
 $i=0;
 $pdf->SetFont( 'Arial', '', 6 );
-$Query = mysqli_query($link,"SELECT * FROM minutedata ORDER BY id DESC");
+$Query = mysqli_query($link,"SELECT * FROM minutedata WHERE id >= $Row_Data[start_id] AND id < $Row_Data[stop_id] ORDER BY id DESC");
 while($Row = mysqli_fetch_array($Query)){
   $pdf -> SetX(17);
   $pdf->Cell( '20', 8, $Row['hour'] , 1, 0, 'C', false );
