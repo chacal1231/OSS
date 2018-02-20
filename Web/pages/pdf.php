@@ -35,16 +35,16 @@ $DU     =   utf8_decode($Row_Data['duration']);
 $OSS    =   utf8_decode($Row_Data['OSS']);
 $CLI    =   utf8_decode($Row_Data['CL']);
 //MPFM data
-$Query_MPFM   = mysqli_query($link,"SELECT AVG(LFR) AS LFR,AVG(OFR) AS OFR,AVG(WFR) AS WFR,AVG(GFR) AS GFR,AVG(WCUT) AS WCUT,AVG(GVF) AS GVF,AVG(TMP) AS TMP,AVG(PRE) AS PRE FROM minutedata WHERE id > Row_Data['start_id'] AND id <= Row_Data['stop_id']");
+$Query_MPFM   = mysqli_query($link,"SELECT AVG(LFR) AS LFR, AVG(OFR) AS OFR, AVG(WFR) AS WFR, AVG(GFR) AS GFR, AVG(WCUT) AS WCUT, AVG(GVF) AS GVF, AVG(TMP) AS TMP, AVG(PRE) AS PRE FROM minutedata WHERE id > $Row_Data[start_id] AND id <= $Row_Data[stop_id]");
 $Row_MPFM     = mysqli_fetch_array($Query_MPFM);
-$LT     =   $Row_MPFM['LFR'];
-$WC     =   $Row_MPFM['WCT'];
-$OIL    =   $Row_MPFM['OFR'];
-$WAT    =   $Row_MPFM['WFR'];
-$GAS    =   $Row_MPFM['GFR'];
-$PRE    =   $Row_MPFM['PRE'];
-$TMP    =   $Row_MPFM['TMP'];
-$GVF    =   $Row_MPFM['GVF'];
+$LT     =   round($Row_MPFM['LFR'],2);
+$WC     =   round($Row_MPFM['WCT'],2);
+$OIL    =   round($Row_MPFM['OFR'],2);
+$WAT    =   round($Row_MPFM['WFR'],2);
+$GAS    =   round($Row_MPFM['GFR'],2);
+$PRE    =   round($Row_MPFM['PRE'],2);
+$TMP    =   round($Row_MPFM['TMP'],2);
+$GVF    =   round($Row_MPFM['GVF'],2);
 $date   =   date('Y-m-d');
 
 // Begin configuration
