@@ -3,8 +3,7 @@
 .datepicker{z-index:1151 !important;}
 </style>
 <?php
-$Start = mysqli_real_escape_string($link,$_GET['s']);
-echo $Start;
+$id	= 	mysqli_real_escape_string($link,$_GET['id']);
 if(isset($_POST['simpan'])){
 	echo "<body onLoad=$('#myModal').modal('hide')>";
 	//Get post variables
@@ -20,6 +19,13 @@ if(isset($_POST['simpan'])){
 	$TK			=	mysqli_real_escape_string($link,$_POST['TK']);
 	$OSS		=	mysqli_real_escape_string($link,$_POST['OSS']);
 	$CL			=	mysqli_real_escape_string($link,$_POST['CL']);
+
+	mysqli_query($link,"UPDATE testing SET LP='$LP',NP='$NP',SN='SN',HZ='$HZ',SISB='$SISB',FA='$FA',DEN='$DEN',API='$API',GR='$GR',TK='$TK',OSS='$OSS',CL='$CL' WHERE id='$id'");
+
+   echo "<div class='alert alert-success' align=center>";
+   echo "<h2>¡Será redirigido al reporte en breve!</h2>";
+   echo "</div>";
+   echo "<script>setTimeout(\"location.href = 'pages/pdf.php?id=$id';\", 3000);</script>";
 
 }else{
 	echo "<body onLoad=$('#myModal').modal('show')>";

@@ -39,7 +39,7 @@ if (isset($_POST['dau'])) {
     //Query
 	mysqli_query($link,"UPDATE testing SET stop='$stop_date',stop_id='$stop_id',status='0',duration='$Duration' WHERE id='$id'");
 	echo mysqli_error($link);
-    echo "<script>setTimeout(\"location.href = '?page=pdfexport&id=$id';\", 3000);</script>";
+    echo "<script>setTimeout(\"location.href = '?page=pdfexport&id=$id';\", 2000);</script>";
     }
 
 $host="127.0.0.1";

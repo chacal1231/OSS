@@ -13,32 +13,39 @@ require('../inc/config.php');
 
 
 //Get variables
-
-$Pozo = "Costayaco";
-$Loc;
-$Nom;
-$SN;
-$HZ;
-$SIS;
-$AL;
-$INI;
-$FIN;
-$DEN;
-$API;
-$GR;
-$TK;
-$DU;
-$LT;
-$WC;
-$OIL;
-$WAT;
-$GAS;
-$PRE;
-$TMP;
-$GVF;
-$OSS;
-$CLI;
-$date = date('Y-m-d');
+$id = mysqli_real_escape_string($link,$_GET['id']);
+//Query
+$Query_Data = mysqli_query($link,"SELECT * FROM testing WHERE id='$id'");
+$Row_Data = mysqli_fetch_array($Query_Data);
+//Well info
+$Pozo   =   utf8_decode($Row_Data['NP']);
+$LOC    =   utf8_decode($Row_Data['LP']);
+$Nom    =   utf8_decode($Row_Data['NP']);
+$SN     =   utf8_decode($Row_Data['SN']);
+$HZ     =   utf8_decode($Row_Data['HZ']);
+$SIS    =   utf8_decode($Row_Data['SISB']);
+$AL     =   utf8_decode($Row_Data['FA']);
+$INI    =   utf8_decode($Row_Data['start']);
+$FIN    =   utf8_decode($Row_Data['stop']);
+$DEN    =   utf8_decode($Row_Data['DEN']);
+$API    =   utf8_decode($Row_Data['API']);
+$GR     =   utf8_decode($Row_Data['GR']);
+$TK     =   utf8_decode($Row_Data['TK']);
+$DU     =   utf8_decode($Row_Data['duration']);
+$OSS    =   utf8_decode($Row_Data['OSS']);
+$CLI    =   utf8_decode($Row_Data['CL']);
+//MPFM data
+$Query_MPFM   = mysqli_query($link,"SELECT AVG(LFR),AVG(OFR),AVG(WFR),AVG(GFR),AVG(WCUT),AVG(GVF),AVG(TMP),AVG(PRE) FROM minutedata WHERE id > Row_Data['start_id'] AND id <= Row_Data['stop_id']");
+$Row_MPFM     = mysqli_fetch_array($Query_MPFM);
+$LT     =   $Row_MPFM['LFR'];
+$WC     =   $Row_MPFM['WCT'];
+$OIL    =   $Row_MPFM['OFR'];
+$WAT    =   $Row_MPFM['WFR'];
+$GAS    =   $Row_MPFM['GFR'];
+$PRE    =   $Row_MPFM['PRE'];
+$TMP    =   $Row_MPFM['TMP'];
+$GVF    =   $Row_MPFM['GVF'];
+$date   =   date('Y-m-d');
 
 // Begin configuration
 $textColour = array( 0, 0, 0 );
