@@ -117,7 +117,7 @@ $result=mysqli_query($link,"SELECT * FROM testing ORDER BY id DESC");
                                             <td><?php echo $field['id']; ?></td>
                                             <td><?php echo $field['start']; ?></td>
                                             <td><?php echo $field['stop']; ?></td>
-                                            <td><?php echo $field['status'] . " Minutes";?></td>
+                                            <td><?php echo $field['duration'] . " Minutes";?></td>
                                             <td>
                                                 <a class="btn btn-success btn-xs" href="?page=eli_activo&id=<?php echo $field['id']; ?>" title="Ver reporte">
                                                     <i class="fa fa-eye"></i>
@@ -185,17 +185,12 @@ $("#status").load('pages/button.php')
                         <style>
                         div.container {
                             margin: 0 auto;
-                            max-width:990px;
+                            max-width:980px;
                         }
                         div.header {
                             margin: 100px auto;
                             line-height:30px;
-                            max-width:990px;
-                        }
-                        body {
-                            background: #f7f7f7;
-                            color: #333;
-                            font: 90%/1.45em "Helvetica Neue",HelveticaNeue,Verdana,Arial,Helvetica,sans-serif;
+                            max-width:980px;
                         }
                     </style>
                 </head>
