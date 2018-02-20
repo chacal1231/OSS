@@ -16,7 +16,7 @@ if (isset($_POST['dau'])) {
 	if(is_null($Row_start['0'])){
 		$start_id='1';
 	}else{
-		$start_id=$Row_start['0'];
+		$start_id=($Row_start['0']+1);
 	}
         mysqli_query($link,"INSERT INTO testing(id,start,stop,start_id,stop_id,status,duration,LP,NP,SN,HZ,SISB,FA,DEN,API,GR,TK,OSS,CL) VALUES('$id','$start_date','0','$start_id','0','1','0','','','','','','','','','','','','')");
 	echo mysqli_error($link);
@@ -34,7 +34,7 @@ if (isset($_POST['dau'])) {
 	//Stop id
 	$Query_start_id=mysqli_query($link,"SELECT * FROM minutedata ORDER BY id DESC");
     	$Row_start=mysqli_fetch_row($Query_start_id);
-    	$stop_id=$Row_start['0'];
+    	$stop_id=($Row_start['0']);
     	$Duration = round(abs(strtotime($row_id['start']) - strtotime($stop_date)) / 60);
     //Query
 	mysqli_query($link,"UPDATE testing SET stop='$stop_date',stop_id='$stop_id',status='0',duration='$Duration' WHERE id='$id'");
