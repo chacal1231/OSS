@@ -35,7 +35,7 @@ $DU     =   utf8_decode($Row_Data['duration']);
 $OSS    =   utf8_decode($Row_Data['OSS']);
 $CLI    =   utf8_decode($Row_Data['CL']);
 //MPFM data
-$Query_MPFM   = mysqli_query($link,"SELECT AVG(LFR),AVG(OFR),AVG(WFR),AVG(GFR),AVG(WCUT),AVG(GVF),AVG(TMP),AVG(PRE) FROM minutedata WHERE id > Row_Data['start_id'] AND id <= Row_Data['stop_id']");
+$Query_MPFM   = mysqli_query($link,"SELECT AVG(LFR) AS LFR,AVG(OFR) AS OFR,AVG(WFR) AS WFR,AVG(GFR) AS GFR,AVG(WCUT) AS WCUT,AVG(GVF) AS GVF,AVG(TMP) AS TMP,AVG(PRE) AS PRE FROM minutedata WHERE id > Row_Data['start_id'] AND id <= Row_Data['stop_id']");
 $Row_MPFM     = mysqli_fetch_array($Query_MPFM);
 $LT     =   $Row_MPFM['LFR'];
 $WC     =   $Row_MPFM['WCT'];
