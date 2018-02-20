@@ -1,7 +1,7 @@
 <?php
 //Configuración servidor Mysql
 include 'inc/config.php';
-
+error_reporting(0);
 include (__DIR__.'/inc/smsGateway.php');
 require (__DIR__.'/inc/config.php');
 //SmsGateway
