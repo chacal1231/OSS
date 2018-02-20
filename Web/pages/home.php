@@ -19,7 +19,7 @@ if (isset($_POST['dau'])) {
 	}else{
 		$start_id=$Row_start['0'];
 	}
-        mysqli_query($link,"INSERT INTO testing(id,start,stop,start_id,stop_id,status) VALUES('$id','$start_date','0','$start_id','0','1')");
+        mysqli_query($link,"INSERT INTO testing(id,start,stop,start_id,stop_id,status) VALUES('$id','$start_date','0','$start_id','0','1','0')");
 	echo mysqli_error($link);
     }elseif ($_POST['dau']=='Stop') {
         $Command = '2';
@@ -34,9 +34,11 @@ if (isset($_POST['dau'])) {
 	$stop_date = date('Y-m-d H:i:s');
 	//Stop id
 	$Query_start_id=mysqli_query($link,"SELECT * FROM minutedata ORDER BY id DESC");
-        $Row_start=mysqli_fetch_row($Query_start_id);
-        $stop_id=$Row_start['0'];
-	mysqli_query($link,"UPDATE testing SET stop='$stop_date',stop_id='$stop_id',status='0' WHERE id='$id'");
+    $Row_start=mysqli_fetch_row($Query_start_id);
+    $stop_id=$Row_start['0'];
+    $Duration = round(abs($row_id['start'] - $stop_date) / 60,2);
+    //Query
+	mysqli_query($link,"UPDATE testing SET stop='$stop_date',stop_id='$stop_id',status='0',duration='$Duration' WHERE id='$id'");
 	echo mysqli_error($link);
     }
 
@@ -111,10 +113,11 @@ $result=mysqli_query($link,"SELECT * FROM testing ORDER BY id DESC");
                                     <tbody>
                                         <?php foreach( $result as $row => $field ) : ?> <!-- Mulai loop -->
                                         <tr class="text-besar">
+                                            <?$Duration = round(abs($field['start'] - $field['stop']) / 60,2)?>
                                             <td><?php echo $field['id']; ?></td>
                                             <td><?php echo $field['start']; ?></td>
                                             <td><?php echo $field['stop']; ?></td>
-                                            <td><?php echo $field['status']; ?></td>
+                                            <td><?php echo $field['status'] . " Minutes";?></td>
                                             <td>
                                                 <a class="btn btn-success btn-xs" href="?page=eli_activo&id=<?php echo $field['id']; ?>" title="Ver reporte">
                                                     <i class="fa fa-eye"></i>
