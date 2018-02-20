@@ -13,8 +13,8 @@ if (isset($_POST['dau'])) {
         //Query ver ID testing
         $Query_start_id=mysqli_query($link,"SELECT * FROM minutedata ORDER BY id DESC");
         $Row_start=mysqli_fetch_row($Query_start_id);
-	if(is_null($result['column'])){
-		$start_id='1';	
+	if(is_null($Row_start['0'])){
+		$start_id='1';
 	}else{
 		$start_id=$Row_start['0'];
 	}
