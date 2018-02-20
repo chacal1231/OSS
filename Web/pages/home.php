@@ -19,7 +19,7 @@ if (isset($_POST['dau'])) {
 	}else{
 		$start_id=$Row_start['0'];
 	}
-        mysqli_query($link,"INSERT INTO testing(id,start,stop,start_id,stop_id,status) VALUES('$id','$start_date','0','$start_id','0','1','0')");
+        mysqli_query($link,"INSERT INTO testing(id,start,stop,start_id,stop_id,status,duration) VALUES('$id','$start_date','0','$start_id','0','1','0')");
 	echo mysqli_error($link);
     }elseif ($_POST['dau']=='Stop') {
         $Command = '2';
