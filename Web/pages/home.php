@@ -24,7 +24,7 @@ if (isset($_POST['dau'])) {
         $Command = '2';
         echo '<div class="alert alert-success" role="alert">
                     <button type="button" class="close" font size="10" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                     <strong>Testing is now stop.</div></strong>';
+                     <strong>Testing is now stop, you will redirect to report.</div></strong>';
 	 //Query para ver el estado de la variable id
         $query_id=mysqli_query($link,"SELECT * FROM testing ORDER BY id DESC");
         $row_id=mysqli_fetch_array($query_id);
@@ -39,6 +39,7 @@ if (isset($_POST['dau'])) {
     //Query
 	mysqli_query($link,"UPDATE testing SET stop='$stop_date',stop_id='$stop_id',status='0',duration='$Duration' WHERE id='$id'");
 	echo mysqli_error($link);
+    echo "<script>setTimeout(\"location.href = '?page=pdfexport&id=$id';\", 3000);</script>";
     }
 
 $host="127.0.0.1";
