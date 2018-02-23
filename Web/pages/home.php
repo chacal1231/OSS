@@ -119,7 +119,7 @@ $result=mysqli_query($link,"SELECT * FROM testing ORDER BY id DESC");
                                             <td><?php echo $field['stop']; ?></td>
                                             <td><?php echo $field['duration'] . " Minutes";?></td>
                                             <td>
-                                                <a class="btn btn-success btn-xs" href="pages/pdf.php?id=<?php echo $field['id']; ?>" title="Ver reporte">
+                                                <a class="btn btn-success btn-xs" target="_blank" href="pages/pdf.php?id=<?php echo $field['id']; ?>" title="Ver reporte">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
 </td>
