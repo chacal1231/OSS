@@ -179,7 +179,7 @@ $("#status").load('pages/button.php')
                             } );
                                 setInterval( function () {
                                     dataTable.ajax.reload();
-                                }, 50000 );
+                                }, 10000 );
                             } );
                         </script>
                         <style>
