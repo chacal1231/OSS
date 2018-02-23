@@ -203,12 +203,12 @@ $("#status").load('pages/button.php')
                                 <th>Date</th>
                                 <th>Hour</th>
                                 <th>LiquidFlow (Sm3/d)</th>
-                                <th>OilFlow</th>
-                                <th>GasFlow</th>
-                                <th>WC</th>
-                                <th>GVF</th>
-                                <th>Temp</th>
-                                <th>Pressure</th>
+                                <th>OilFlow (Sm3/d)</th>
+                                <th>GasFlow (Sm3/d)</th>
+                                <th>WC (%)</th>
+                                <th>GVF (%)</th>
+                                <th>Temp (°C)</th>
+                                <th>Pressure (kPa)</th>
                             </tr>
                         </thead>
                         </div>
