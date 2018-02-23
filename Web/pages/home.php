@@ -39,7 +39,7 @@ if (isset($_POST['dau'])) {
     //Query
 	mysqli_query($link,"UPDATE testing SET stop='$stop_date',stop_id='$stop_id',status='0',duration='$Duration' WHERE id='$id'");
 	echo mysqli_error($link);
-    echo "<script>setTimeout(\"location.href = '?page=pdfexport&id=$id';\", 2000);</script>";
+    echo "<script>setTimeout(\"window.open('?page=pdfexport&id=$id');\", 2000);</script>";
     }
 
 $host="127.0.0.1";
@@ -202,13 +202,13 @@ $("#status").load('pages/button.php')
                             <tr>
                                 <th>Date</th>
                                 <th>Hour</th>
-                                <th>LiquidFlow (Sm3/d)</th>
-                                <th>OilFlow (Sm3/d)</th>
-                                <th>GasFlow (Sm3/d)</th>
-                                <th>WC (%)</th>
-                                <th>GVF (%)</th>
-                                <th>Temp (°C)</th>
-                                <th>Pressure (kPa)</th>
+                                <th>LiquidFlow(Sm3/d)</th>
+                                <th>OilFlow(Sm3/d)</th>
+                                <th>GasFlow(Sm3/d)</th>
+                                <th>WC(%)</th>
+                                <th>GVF(%)</th>
+                                <th>Temp(°C)</th>
+                                <th>Press(kPa)</th>
                             </tr>
                         </thead>
                         </div>
