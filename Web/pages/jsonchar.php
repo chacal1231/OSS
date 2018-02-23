@@ -12,7 +12,17 @@ if (mysqli_connect_errno($con))
 {
     $data_points = array();
     
-    $result = mysqli_query($con, "SELECT * FROM minutedata");
+    $QueryTesting       =       mysqli_query($con,"SELECT * FROM testing ORDER BY id DESC");
+    $RowTesting         =       mysqli_fetch_array($QueryTesting);
+    if($RowTesting['stop_id'] == '0'){
+        $id_e = $RowTesting['start_id'];
+    }
+    else{
+        $id_e = $RowTesting['stop_id']; 
+    }
+
+    $result = mysqli_query($con, "SELECT * FROM minutedata WHERE id > $id_e");
+
     
     while($row = mysqli_fetch_array($result))
     {        

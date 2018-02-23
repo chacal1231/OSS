@@ -31,7 +31,7 @@ $DEN    =   utf8_decode($Row_Data['DEN']);
 $API    =   utf8_decode($Row_Data['API']);
 $GR     =   utf8_decode($Row_Data['GR']);
 $TK     =   utf8_decode($Row_Data['TK']);
-$DU     =   utf8_decode($Row_Data['duration']);
+$DU     =   utf8_decode(round(($Row_Data['duration']/60),2));
 $OSS    =   utf8_decode($Row_Data['OSS']);
 $CLI    =   utf8_decode($Row_Data['CL']);
 //MPFM data

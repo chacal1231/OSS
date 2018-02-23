@@ -24,9 +24,18 @@ $columns = array(
 
 );
 
+//Query for check testing status
+    $QueryTesting	=	mysqli_query($conn,"SELECT * FROM testing ORDER BY id DESC");
+    $RowTesting		=	mysqli_fetch_array($QueryTesting);
+    if($RowTesting['stop_id'] == '0'){
+	$id_e = $RowTesting['start_id'];
+    }
+    else{
+	$id_e = $RowTesting['stop_id']; 
+    }
 // getting total number records without any search
 $sql = "SELECT OFR as LiquidFlow, OFR as OilFlow, GFR as GasFlow, WCUT as WC, GVF, TMP, PRE as Pressure ";
-$sql.=" FROM minutedata";
+$sql.=" FROM minutedata WHERE id > $id_e";
 $query=mysqli_query($conn, $sql) or die("employee-grid-data.php: get employees");
 $totalData = mysqli_num_rows($query);
 $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
@@ -52,7 +61,7 @@ if( !empty($requestData['search']['value']) ) {
 } else {	
 
 	$sql = "SELECT Datex, hour, OFR as LiquidFlow, OFR as OilFlow, GFR as GasFlow, WCUT as WC, GVF, TMP, PRE as Pressure  ";
-	$sql.=" FROM minutedata";
+	$sql.=" FROM minutedata WHERE id > $id_e";
 	$sql.=" ORDER BY id DESC LIMIT ".$requestData['start']." ,".$requestData['length']."   ";
 	$query=mysqli_query($conn, $sql) or die("employee-grid-data.php: get employees");
 	
