@@ -215,7 +215,7 @@ $pdf->Cell( '20', 8, utf8_decode("Crudo (SBPD)"), 1, 0, 'C', true );
 $pdf->Cell( '20', 8, utf8_decode("Agua (SBPD)"), 1, 0, 'C', true );
 $pdf->Cell( '20', 8, utf8_decode("Gas (SCFD)"), 1, 0, 'C', true );
 $pdf->Cell( '20', 8, utf8_decode("Presión (PSI)"), 1, 0, 'C', true );
-$pdf->Cell( '30', 8, utf8_decode("Temperatura (°F)"), 1, 0, 'C', true );
+$pdf->Cell( '30', 8, utf8_decode("Temperatura (°C)"), 1, 0, 'C', true );
 $pdf->Cell( '10', 8, utf8_decode("GVF (%)"), 1, 0, 'C', true );
 $pdf->Ln( 8 );
 $pdf -> SetX(17);
@@ -331,6 +331,6 @@ while($Row = mysqli_fetch_array($Query)){
   $i++;
 }
 
-$pdf->Output( "report.pdf", "I" );
+$pdf->Output( "Reporte $Nom $date.pdf", "I" );
 
 ?>
