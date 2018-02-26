@@ -618,7 +618,7 @@ foreach ($Query2 as $Row){
 }
 $data2 = $data3;
 $colors = array(
-    'Gas (SCFD)' => array(255,171,237),
+    'Gas (SCFD)' => array(0,251,237),
 );
 $pdf->Ln(10);
 $w=190;
@@ -782,7 +782,7 @@ $pdf->Image('../backend/panel/images/logo.png' , 10 ,8, 40 , 20,'PNG');
 $pdf->Cell( 0, 10, "HAIMO MPFM", 0, 0, 'C' );
 $pdf->Ln(6);
 $pdf->SetFont( 'Arial', 'B', 12 );
-$pdf->Cell( 0, 10, "Temperatura y presión vs tiempo", 0, 0, 'C' );
+$pdf->Cell( 0, 10, utf8_decode("Temperatura y presión vs tiempo"), 0, 0, 'C' );
 $pdf->Ln(15);
 $data4['Temp (°F)'] = array();
 $data4['Press (PSI)'] = array();
@@ -923,7 +923,7 @@ $nbDiv=10;
             if(!isset($n))$n=0;
             $pdf->Line($keyX+1,$keyY+$lineh/2+$n*$lineh,$keyX+8,$keyY+$lineh/2+$n*$lineh);
             $pdf->SetXY($keyX+8,$keyY+$n*$lineh);
-            $pdf->Cell($keyW,$lineh,$key,0,1,'L');
+            $pdf->Cell($keyW,$lineh,utf8_decode($key),0,1,'L');
             $n++;
         }
         //print the abscissa values
@@ -988,7 +988,7 @@ while($Row = mysqli_fetch_array($Query)){
   $pdf->Cell( '20', 8, round($Row['PRE'],2), 1, 0, 'C', false );
   $pdf->Ln(8);
   $i++;
-
+}
 
 //Minute data table
 
@@ -1029,7 +1029,6 @@ while($Row = mysqli_fetch_array($Query)){
   $pdf->Ln(8);
   $i++;
 }
-
 
 $pdf->Output( "Reporte $Nom $date.pdf", "I" );
 ?>
