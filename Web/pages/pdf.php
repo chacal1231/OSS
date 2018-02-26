@@ -334,27 +334,29 @@ $pdf->SetFont( 'Arial', 'B', 17 );
 $pdf->Image('../backend/panel/images/logo.png' , 10 ,8, 40 , 20,'PNG');
 $pdf->Cell( 0, 10, "HAIMO MPFM", 0, 0, 'C' );
 $pdf->Ln(6);
-$pdf->Cell( 0, 10, "Graficas", 0, 0, 'C' );
+$pdf->SetFont( 'Arial', 'B', 12 );
+$pdf->Cell( 0, 10, "Tasas de flujo(Gas,Crudo,Agua) VS tiempo", 0, 0, 'C' );
 $pdf->Ln(15);
 $Query2 = mysqli_query($link,"SELECT HOUR(hour) as hour, AVG(LFR) AS LFR, AVG(OFR) AS OFR, AVG(WFR) AS WFR, AVG(GFR) AS GFR, AVG(WCUT) AS WCUT, AVG(GVF) AS GVF, AVG(TMP) AS TMP, AVG(PRE) AS PRE FROM `minutedata` group by HOUR(hour)");
-$data['Flujo de gas'] = array();
-$data['Flujo de crudo'] = array();
+$data['Flujo de gas (SCFD)'] = array();
+$data['Flujo de crudo (SBPD)'] = array();
 foreach ($Query2 as $Row){
-        $data['Flujo de gas'][$Row['hour']] = ($Row['GFR']);
-	$data['Flujo de crudo'][$Row['hour']] = $Row['OFR'];
-	$data['Flujo de agua'][$Row['hour']] = $Row['WFR'];
+        $data['Flujo de gas (SCFD)'][$Row['hour']] = ($Row['GFR']);
+	$data['Flujo de crudo (SBPD)'][$Row['hour']] = $Row['OFR'];
+	$data['Flujo de agua (SBPD)'][$Row['hour']] = $Row['WFR'];
 }
 $colors = array(
-    'Flujo de gas' => array(114,171,237),
-    'Flujo de crudo' => array(104,121,207),
-    'Flujo de agua' => array(200,232,137),
+    'Flujo de gas (SCFD)' => array(114,171,237),
+    'Flujo de crudo (SBPD)' => array(104,121,207),
+    'Flujo de agua (SBPD)' => array(200,232,137),
 );
 
+$pdf->Ln(10);
 $w=180;
 $h=100;
-$options='VHkBvBgBdB';
-$maxVal=6;
-$nbDiv=3;
+$options='VHvBdB';
+$maxVal=10;
+$nbDiv=10;
         /*******************************************
         Explain the variables:
         $w = the width of the diagram
@@ -504,6 +506,182 @@ $nbDiv=3;
 $pdf->Ln(100);
 $pdf->SetFont( 'Arial', 'B', 12 );
 $pdf->Cell( 0, 10, "Tiempo (Horas)", 0, 0, 'C' );
+
+
+$pdf->AddPage();
+$pdf->SetTextColor( $headerColour[0], $headerColour[1], $headerColour[2] );
+$pdf->SetFont( 'Arial', 'B', 17 );
+$pdf->Image('../backend/panel/images/logo.png' , 10 ,8, 40 , 20,'PNG');
+$pdf->Cell( 0, 10, "HAIMO MPFM", 0, 0, 'C' );
+$pdf->Ln(6);
+$pdf->SetFont( 'Arial', 'B', 12 );
+$pdf->Cell( 0, 10, "Tasas de flujo(WC,GVF) vs tiempo", 0, 0, 'C' );
+$pdf->Ln(15);
+$data2['WC (%)'] = array();
+$data2['GVF (%)'] = array();
+foreach ($Query2 as $Row){
+        $data2['WC (%)'][$Row['hour']] = $Row['WCUT'];
+	$data2['GVF (%)'][$Row['hour']] =$Row['GVF'];
+}
+$colors = array(
+    'WC (%)' => array(114,171,237),
+    'GVF (%)' => array(104,121,207),
+);
+$pdf->Ln(10);
+$w=180;
+$h=100;
+$options='VHvBgBdB';
+$maxVal=6;
+$nbDiv=3;
+        /*******************************************
+        Explain the variables:
+        $w = the width of the diagram
+        $h = the height of the diagram
+        $data = the data for the diagram in the form of a multidimensional array
+        $options = the possible formatting options which include:
+            'V' = Print Vertical Divider lines
+            'H' = Print Horizontal Divider Lines
+            'kB' = Print bounding box around the Key (legend)
+            'vB' = Print bounding box around the values under the graph
+            'gB' = Print bounding box around the graph
+            'dB' = Print bounding box around the entire diagram
+        $colors = A multidimensional array containing RGB values
+        $maxVal = The Maximum Value for the graph vertically
+        $nbDiv = The number of vertical Divisions
+        *******************************************/
+        $pdf->SetDrawColor(0,0,0);
+        $pdf->SetLineWidth(0.2);
+        $keys = array_keys($data2);
+        $ordinateWidth = 10;
+        $w -= $ordinateWidth;
+        $valX = $pdf->getX()+$ordinateWidth;
+        $valY = $pdf->getY();
+        $margin = 1;
+        $titleH = 8;
+        $titleW = $w;
+        $lineh = 5;
+        $keyH = count($data2)*$lineh;
+        $keyW = $w/5;
+        $graphValH = 5;
+        $graphValW = $w-$keyW-3*$margin;
+        $graphH = $h-(3*$margin)-$graphValH;
+        $graphW = $w-(2*$margin)-($keyW+$margin);
+        $graphX = $valX+$margin;
+        $graphY = $valY+$margin;
+        $graphValX = $valX+$margin;
+        $graphValY = $valY+2*$margin+$graphH;
+        $keyX = $valX+(2*$margin)+$graphW;
+        $keyY = $valY+$margin+.5*($h-(2*$margin))-.5*($keyH);
+        //draw graph frame border
+        if(strstr($options,'gB')){
+            $pdf->Rect($valX,$valY,$w,$h);
+        }
+        //draw graph diagram border
+        if(strstr($options,'dB')){
+            $pdf->Rect($valX+$margin,$valY+$margin,$graphW,$graphH);
+        }
+        //draw key legend border
+        if(strstr($options,'kB')){
+            $pdf->Rect($keyX,$keyY,$keyW,$keyH);
+        }
+        //draw graph value box
+        if(strstr($options,'vB')){
+            $pdf->Rect($graphValX,$graphValY,$graphValW,$graphValH);
+        }
+        //define colors
+        if($colors===null){
+            $safeColors = array(0,51,102,153,204,225);
+            for($i=0;$i<count($data2);$i++){
+                $colors[$keys[$i]] = array($safeColors[array_rand($safeColors)],$safeColors[array_rand($safeColors)],$safeColors[array_rand($safeColors)]);
+            }
+        }
+        //form an array with all data values from the multi-demensional $data array
+        $ValArray = array();
+        foreach($data2 as $key => $value){
+            foreach($data2[$key] as $val){
+                $ValArray[]=$val;                    
+            }
+        }
+        //define max value
+        if($maxVal<ceil(max($ValArray))){
+            $maxVal = ceil(max($ValArray));
+        }
+        //draw horizontal lines
+        $vertDivH = $graphH/$nbDiv;
+        if(strstr($options,'H')){
+            for($i=0;$i<=$nbDiv;$i++){
+                if($i<$nbDiv){
+                    $pdf->Line($graphX,$graphY+$i*$vertDivH,$graphX+$graphW,$graphY+$i*$vertDivH);
+                } else{
+                    $pdf->Line($graphX,$graphY+$graphH,$graphX+$graphW,$graphY+$graphH);
+                }
+            }
+        }
+        //draw vertical lines
+        $horiDivW = floor($graphW/(count($data2[$keys[0]])-1));
+        if(strstr($options,'V')){
+            for($i=0;$i<=(count($data2[$keys[0]])-1);$i++){
+                if($i<(count($data2[$keys[0]])-1)){
+                    $pdf->Line($graphX+$i*$horiDivW,$graphY,$graphX+$i*$horiDivW,$graphY+$graphH);
+                } else {
+                    $pdf->Line($graphX+$graphW,$graphY,$graphX+$graphW,$graphY+$graphH);
+                }
+            }
+        }
+        //draw graph lines
+        foreach($data2 as $key => $value){
+            $pdf->setDrawColor($colors[$key][0],$colors[$key][1],$colors[$key][2]);
+            $pdf->SetLineWidth(0.8);
+            $valueKeys = array_keys($value);
+            for($i=0;$i<count($value);$i++){
+                if($i==count($value)-2){
+                    $pdf->Line(
+                        $graphX+($i*$horiDivW),
+                        $graphY+$graphH-($value[$valueKeys[$i]]/$maxVal*$graphH),
+                        $graphX+$graphW,
+                        $graphY+$graphH-($value[$valueKeys[$i+1]]/$maxVal*$graphH)
+                    );
+                } else if($i<(count($value)-1)) {
+                    $pdf->Line(
+                        $graphX+($i*$horiDivW),
+                        $graphY+$graphH-($value[$valueKeys[$i]]/$maxVal*$graphH),
+                        $graphX+($i+1)*$horiDivW,
+                        $graphY+$graphH-($value[$valueKeys[$i+1]]/$maxVal*$graphH)
+                    );
+                }
+            }
+            //Set the Key (legend)
+            $pdf->SetFont('Courier','',10);
+            if(!isset($n))$n=0;
+            $pdf->Line($keyX+1,$keyY+$lineh/2+$n*$lineh,$keyX+8,$keyY+$lineh/2+$n*$lineh);
+            $pdf->SetXY($keyX+8,$keyY+$n*$lineh);
+            $pdf->Cell($keyW,$lineh,$key,0,1,'L');
+            $n++;
+        }
+        //print the abscissa values
+        foreach($valueKeys as $key => $value){
+            if($key==0){
+                $pdf->SetXY($graphValX,$graphValY);
+                $pdf->Cell(30,$lineh,$value,0,0,'L');
+            } else if($key==count($valueKeys)-1){
+                $pdf->SetXY($graphValX+$graphValW-30,$graphValY);
+                $pdf->Cell(30,$lineh,$value,0,0,'R');
+            } else {
+                $pdf->SetXY($graphValX+$key*$horiDivW-15,$graphValY);
+                $pdf->Cell(30,$lineh,$value,0,0,'C');
+            }
+        }
+        //print the ordinate values
+        for($i=0;$i<=$nbDiv;$i++){
+            $pdf->SetXY($graphValX-10,$graphY+($nbDiv-$i)*$vertDivH-3);
+            $pdf->Cell(8,6,sprintf('%.1f',$maxVal/$nbDiv*$i),0,0,'R');
+        }
+        $pdf->SetDrawColor(0,0,0);
+        $pdf->SetLineWidth(0.2);
+$pdf->Ln(100);
+$pdf->SetFont( 'Arial', 'B', 12 );
+$pdf->Cell( 0, 10, "Tiempo (Horas)", 0, 0, 'C' );
+
 
 
 $pdf->Output( "Reporte $Nom $date.pdf", "I" );
