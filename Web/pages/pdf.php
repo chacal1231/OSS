@@ -1033,5 +1033,4 @@ while($Row = mysqli_fetch_array($Query)){
 
 $pdf->Output( "Reporte $Nom $date.pdf", "I" );
 ?>
-}
 
