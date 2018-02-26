@@ -11,7 +11,7 @@ client= ModbusClient(method = "rtu", port="/dev/ttyUSB0",stopbits = 1, bytesize 
 
 #Connect to the serial modbus server
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect(('181.129.168.242', 7774))
+client_socket.connect(('192.34.109.236', 7774))
 while 1:
 	#Flag UP
 	with open('/home/pi/OSS/Python/flag.txt', 'r+') as f:
