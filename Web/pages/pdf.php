@@ -212,7 +212,7 @@ $pdf->Cell( '20', 8, utf8_decode("Crudo (SBPD)"), 1, 0, 'C', true );
 $pdf->Cell( '20', 8, utf8_decode("Agua (SBPD)"), 1, 0, 'C', true );
 $pdf->Cell( '20', 8, utf8_decode("Gas (SCFD)"), 1, 0, 'C', true );
 $pdf->Cell( '20', 8, utf8_decode("Presión (PSI)"), 1, 0, 'C', true );
-$pdf->Cell( '30', 8, utf8_decode("Temperatura (°C)"), 1, 0, 'C', true );
+$pdf->Cell( '30', 8, utf8_decode("Temperatura (°F)"), 1, 0, 'C', true );
 $pdf->Cell( '10', 8, utf8_decode("GVF (%)"), 1, 0, 'C', true );
 $pdf->Ln( 8 );
 $pdf -> SetX(17);
@@ -248,85 +248,6 @@ $pdf -> SetX(131);
 $pdf->SetFont( 'Arial', '', 8 );
 $pdf->Write( 6, $CLI );
 
-//Minute data table
-
-$pdf->AddPage();
-$pdf->SetTextColor( $headerColour[0], $headerColour[1], $headerColour[2] );
-$pdf->SetFont( 'Arial', 'B', 17 );
-$pdf->Image('../backend/panel/images/logo.png' , 10 ,8, 40 , 20,'PNG');
-$pdf->Cell( 0, 10, "HAIMO MPFM", 0, 0, 'C' );
-$pdf->Ln(6);
-$pdf->Cell( 0, 10, "DATA POR MINUTO", 0, 0, 'C' );
-$pdf->Ln(15);
-$pdf->SetFont( 'Arial', 'B', 7 );
-$pdf -> SetX(17);
-$pdf->Cell( '20', 8, utf8_decode("Tiempo"), 1, 0, 'C', true );
-$pdf->Cell( '20', 8, utf8_decode("Líquido (SBPD)"), 1, 0, 'C', true );
-$pdf->Cell( '20', 8, utf8_decode("Crudo (SBPD)"), 1, 0, 'C', true );
-$pdf->Cell( '20', 8, utf8_decode("Agua (SBPD)"), 1, 0, 'C', true );
-$pdf->Cell( '20', 8, utf8_decode("Gas (SBPD)"), 1, 0, 'C', true );
-$pdf->Cell( '10', 8, utf8_decode("WC (%)"), 1, 0, 'C', true );
-$pdf->Cell( '20', 8, utf8_decode("GVF (%)"), 1, 0, 'C', true );
-$pdf->Cell( '30', 8, utf8_decode("Temperatura (F)"), 1, 0, 'C', true );
-$pdf->Cell( '20', 8, utf8_decode("Pres (PSI)"), 1, 0, 'C', true );
-$pdf->Ln(8);
-$i=0;
-$pdf->SetFont( 'Arial', '', 6 );
-$Query = mysqli_query($link,"SELECT * FROM minutedata WHERE id >= $Row_Data[start_id] AND id <= $Row_Data[stop_id] ORDER BY id DESC");
-while($Row = mysqli_fetch_array($Query)){
-  $pdf -> SetX(17);
-  $pdf->Cell( '20', 8, $Row['hour'] , 1, 0, 'C', false );
-  $pdf->Cell( '20', 8, $Row['LFR'], 1, 0, 'C', false );
-  $pdf->Cell( '20', 8, $Row['OFR'], 1, 0, 'C', false );
-  $pdf->Cell( '20', 8, $Row['WFR'], 1, 0, 'C', false );
-  $pdf->Cell( '20', 8, $Row['GFR'], 1, 0, 'C', false );
-  $pdf->Cell( '10', 8, $Row['WCUT'], 1, 0, 'C', false );
-  $pdf->Cell( '20', 8, $Row['GVF'], 1, 0, 'C', false );
-  $pdf->Cell( '30', 8, $Row['TMP'], 1, 0, 'C', false );
-  $pdf->Cell( '20', 8, $Row['PRE'], 1, 0, 'C', false );
-  $pdf->Ln(8);
-  $i++;
-}
-
-//Hour Data Table
-
-$pdf->AddPage();
-$pdf->SetTextColor( $headerColour[0], $headerColour[1], $headerColour[2] );
-$pdf->SetFont( 'Arial', 'B', 17 );
-$pdf->Image('../backend/panel/images/logo.png' , 10 ,8, 40 , 20,'PNG');
-$pdf->Cell( 0, 10, "HAIMO MPFM", 0, 0, 'C' );
-$pdf->Ln(6);
-$pdf->Cell( 0, 10, "DATA POR HORA", 0, 0, 'C' );
-$pdf->Ln(15);
-$pdf->SetFont( 'Arial', 'B', 7 );
-$pdf -> SetX(17);
-$pdf->Cell( '20', 8, utf8_decode("Hora"), 1, 0, 'C', true );
-$pdf->Cell( '20', 8, utf8_decode("Líquido (SBPD)"), 1, 0, 'C', true );
-$pdf->Cell( '20', 8, utf8_decode("Crudo (SBPD)"), 1, 0, 'C', true );
-$pdf->Cell( '20', 8, utf8_decode("Agua (SBPD)"), 1, 0, 'C', true );
-$pdf->Cell( '20', 8, utf8_decode("Gas (SBPD)"), 1, 0, 'C', true );
-$pdf->Cell( '10', 8, utf8_decode("WC (%)"), 1, 0, 'C', true );
-$pdf->Cell( '20', 8, utf8_decode("GVF (%)"), 1, 0, 'C', true );
-$pdf->Cell( '30', 8, utf8_decode("Temperatura (°C)"), 1, 0, 'C', true );
-$pdf->Cell( '20', 8, utf8_decode("Pres (PSI)"), 1, 0, 'C', true );
-$pdf->Ln(8);
-$i=0;
-$pdf->SetFont( 'Arial', '', 6 );
-$Query = mysqli_query($link,"SELECT HOUR(hour) as hour, AVG(LFR) AS LFR, AVG(OFR) AS OFR, AVG(WFR) AS WFR, AVG(GFR) AS GFR, AVG(WCUT) AS WCUT, AVG(GVF) AS GVF, AVG(TMP) AS TMP, AVG(PRE) AS PRE FROM `minutedata` WHERE id >= $Row_Data[start_id] AND id <= $Row_Data[stop_id] GROUP BY HOUR(hour)");
-while($Row = mysqli_fetch_array($Query)){
-  $pdf -> SetX(17);
-  $pdf->Cell( '20', 8, round($Row['hour'],2) , 1, 0, 'C', false );
-  $pdf->Cell( '20', 8, round($Row['LFR'],2), 1, 0, 'C', false );
-  $pdf->Cell( '20', 8, round($Row['OFR'],2), 1, 0, 'C', false );
-  $pdf->Cell( '20', 8, round($Row['WFR'],2), 1, 0, 'C', false );
-  $pdf->Cell( '20', 8, round($Row['GFR'],2), 1, 0, 'C', false );
-  $pdf->Cell( '10', 8, round($Row['WCUT'],2), 1, 0, 'C', false );
-  $pdf->Cell( '20', 8, round($Row['GVF'],2), 1, 0, 'C', false );
-  $pdf->Cell( '30', 8, round($Row['TMP'],2), 1, 0, 'C', false );
-  $pdf->Cell( '20', 8, round($Row['PRE'],2), 1, 0, 'C', false );
-  $pdf->Ln(8);
-  $i++;
-}
 
 $pdf->AddPage();
 $pdf->SetTextColor( $headerColour[0], $headerColour[1], $headerColour[2] );
@@ -342,8 +263,8 @@ $data['crudo (SBPD)'] = array();
 $data['agua (SBPD)'] = array();
 foreach ($Query2 as $Row){
         $data['crudo (SBPD)'][$Row['hour']] = $Row['OFR'];
-	$data['agua (SBPD)'][$Row['hour']] = $Row['WFR'];
-	$data['liquido (SBPD)'][$Row['hour']] = $Row['LFR'];
+  $data['agua (SBPD)'][$Row['hour']] = $Row['WFR'];
+  $data['liquido (SBPD)'][$Row['hour']] = $Row['LFR'];
 }
 $colors = array(
     'crudo (SBPD)' => array(104,121,207),
@@ -515,13 +436,13 @@ $pdf->Image('../backend/panel/images/logo.png' , 10 ,8, 40 , 20,'PNG');
 $pdf->Cell( 0, 10, "HAIMO MPFM", 0, 0, 'C' );
 $pdf->Ln(6);
 $pdf->SetFont( 'Arial', 'B', 12 );
-$pdf->Cell( 0, 10, "Tasas de flujo(WC,GVF) vs tiempo", 0, 0, 'C' );
+$pdf->Cell( 0, 10, "Tasas de flujo (WC,GVF) vs tiempo", 0, 0, 'C' );
 $pdf->Ln(15);
 $data2['WC (%)'] = array();
 $data2['GVF (%)'] = array();
 foreach ($Query2 as $Row){
         $data2['WC (%)'][$Row['hour']] = $Row['WCUT'];
-	$data2['GVF (%)'][$Row['hour']] =$Row['GVF'];
+  $data2['GVF (%)'][$Row['hour']] =$Row['GVF'];
 }
 $colors = array(
     'WC (%)' => array(114,171,237),
@@ -861,16 +782,16 @@ $pdf->Image('../backend/panel/images/logo.png' , 10 ,8, 40 , 20,'PNG');
 $pdf->Cell( 0, 10, "HAIMO MPFM", 0, 0, 'C' );
 $pdf->Ln(6);
 $pdf->SetFont( 'Arial', 'B', 12 );
-$pdf->Cell( 0, 10, "Temperatura y presion vs tiempo", 0, 0, 'C' );
+$pdf->Cell( 0, 10, "Temperatura y presión vs tiempo", 0, 0, 'C' );
 $pdf->Ln(15);
 $data4['Temp (°F)'] = array();
 $data4['Press (PSI)'] = array();
 foreach ($Query2 as $Row){
         $data4['Temp (°F)'][$Row['hour']] = $Row['TMP'];
-	$data4['Press (PSI)'][$Row['hour']] =$Row['PRE'];
+  $data4['Press (PSI)'][$Row['hour']] =$Row['PRE'];
 }
 $colors = array(
-    'Temp (F)' => array(255,0,0),
+    'Temp (°F)' => array(255,0,0),
     'Press (PSI)' => array(104,21,247),
 );
 $data2=$data4;
@@ -1029,6 +950,88 @@ $pdf->Ln(100);
 $pdf->SetFont( 'Arial', 'B', 12 );
 $pdf->Cell( 0, 10, "Tiempo (Horas)", 0, 0, 'C' );
 
+//Hour Data Table
+
+$pdf->AddPage();
+$pdf->SetTextColor( $headerColour[0], $headerColour[1], $headerColour[2] );
+$pdf->SetFont( 'Arial', 'B', 17 );
+$pdf->Image('../backend/panel/images/logo.png' , 10 ,8, 40 , 20,'PNG');
+$pdf->Cell( 0, 10, "HAIMO MPFM", 0, 0, 'C' );
+$pdf->Ln(6);
+$pdf->Cell( 0, 10, "DATA POR HORA", 0, 0, 'C' );
+$pdf->Ln(15);
+$pdf->SetFont( 'Arial', 'B', 7 );
+$pdf -> SetX(17);
+$pdf->Cell( '20', 8, utf8_decode("Hora"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("Líquido (SBPD)"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("Crudo (SBPD)"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("Agua (SBPD)"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("Gas (SBPD)"), 1, 0, 'C', true );
+$pdf->Cell( '10', 8, utf8_decode("WC (%)"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("GVF (%)"), 1, 0, 'C', true );
+$pdf->Cell( '30', 8, utf8_decode("Temperatura (°F)"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("Pres (PSI)"), 1, 0, 'C', true );
+$pdf->Ln(8);
+$i=0;
+$pdf->SetFont( 'Arial', '', 6 );
+$Query = mysqli_query($link,"SELECT HOUR(hour) as hour, AVG(LFR) AS LFR, AVG(OFR) AS OFR, AVG(WFR) AS WFR, AVG(GFR) AS GFR, AVG(WCUT) AS WCUT, AVG(GVF) AS GVF, AVG(TMP) AS TMP, AVG(PRE) AS PRE FROM `minutedata` WHERE id >= $Row_Data[start_id] AND id <= $Row_Data[stop_id] GROUP BY HOUR(hour)");
+while($Row = mysqli_fetch_array($Query)){
+  $pdf -> SetX(17);
+  $pdf->Cell( '20', 8, round($Row['hour'],2) , 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, round($Row['LFR'],2), 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, round($Row['OFR'],2), 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, round($Row['WFR'],2), 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, round($Row['GFR'],2), 1, 0, 'C', false );
+  $pdf->Cell( '10', 8, round($Row['WCUT'],2), 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, round($Row['GVF'],2), 1, 0, 'C', false );
+  $pdf->Cell( '30', 8, round($Row['TMP'],2), 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, round($Row['PRE'],2), 1, 0, 'C', false );
+  $pdf->Ln(8);
+  $i++;
+
+
+//Minute data table
+
+$pdf->AddPage();
+$pdf->SetTextColor( $headerColour[0], $headerColour[1], $headerColour[2] );
+$pdf->SetFont( 'Arial', 'B', 17 );
+$pdf->Image('../backend/panel/images/logo.png' , 10 ,8, 40 , 20,'PNG');
+$pdf->Cell( 0, 10, "HAIMO MPFM", 0, 0, 'C' );
+$pdf->Ln(6);
+$pdf->Cell( 0, 10, "DATA POR MINUTO", 0, 0, 'C' );
+$pdf->Ln(15);
+$pdf->SetFont( 'Arial', 'B', 7 );
+$pdf -> SetX(17);
+$pdf->Cell( '20', 8, utf8_decode("Tiempo"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("Líquido (SBPD)"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("Crudo (SBPD)"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("Agua (SBPD)"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("Gas (SBPD)"), 1, 0, 'C', true );
+$pdf->Cell( '10', 8, utf8_decode("WC (%)"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("GVF (%)"), 1, 0, 'C', true );
+$pdf->Cell( '30', 8, utf8_decode("Temperatura (°F)"), 1, 0, 'C', true );
+$pdf->Cell( '20', 8, utf8_decode("Pres (PSI)"), 1, 0, 'C', true );
+$pdf->Ln(8);
+$i=0;
+$pdf->SetFont( 'Arial', '', 6 );
+$Query = mysqli_query($link,"SELECT * FROM minutedata WHERE id >= $Row_Data[start_id] AND id <= $Row_Data[stop_id] ORDER BY id DESC");
+while($Row = mysqli_fetch_array($Query)){
+  $pdf -> SetX(17);
+  $pdf->Cell( '20', 8, $Row['hour'] , 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, $Row['LFR'], 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, $Row['OFR'], 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, $Row['WFR'], 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, $Row['GFR'], 1, 0, 'C', false );
+  $pdf->Cell( '10', 8, $Row['WCUT'], 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, $Row['GVF'], 1, 0, 'C', false );
+  $pdf->Cell( '30', 8, $Row['TMP'], 1, 0, 'C', false );
+  $pdf->Cell( '20', 8, $Row['PRE'], 1, 0, 'C', false );
+  $pdf->Ln(8);
+  $i++;
+}
+
 
 $pdf->Output( "Reporte $Nom $date.pdf", "I" );
 ?>
+}
+
