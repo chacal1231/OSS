@@ -2,6 +2,7 @@
 if (isset($_POST['dau'])) {
     if($_POST['dau']=='Start'){
         $Command = '1';
+	$name = $_POST['name'];
         echo '<div class="alert alert-success" role="alert">
                     <button type="button" font size="10" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                      <strong>Testing is now starting, wait 60s for see the info.</div></strong>';
@@ -140,6 +141,10 @@ $("#status").load('pages/button.php')
 }, 1000);
 });
 </script>
+<?php
+$result2 = mysqli_query($link,"SELECT name FROM profile ORDER BY id DESC");
+$row2 = mysqli_fetch_array($result2);
+?>
      <div class="col-sm-12">
         <section class="panel">
             <header class="panel-heading">
@@ -150,6 +155,19 @@ $("#status").load('pages/button.php')
                             <form action="" method="post">
                             <input id='submit_tea'  class="btn btn-success"  type='submit' name = 'dau' value = 'Start' />
                             <input id='submit_tea'  class="btn btn-danger"  type='submit' name = 'dau' value = 'Stop' />
+			     <b><br>Testing profile: <select style='font-size: 15px; font-family: "Verdana", Sans-Serif;' id="name" name="name" class="form-control">
+                                <?php
+                                
+                                    do 
+                                    {
+                                        ?>
+                                        <option value="<?php echo $row2['name']?>">
+                                        <?php echo $row2['name']; ?>
+                                        </option>
+                                        <?php
+                                    }while ($row2 = $result2->fetch_assoc())   ?>   
+                                
+			    </select></b>
                             </form>
                             <hr/>
                             <head>
