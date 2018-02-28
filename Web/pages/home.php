@@ -190,7 +190,6 @@ $row2 = mysqli_fetch_array($result2);
                                     type: "post",  // method  , by default get
                                     error: function(){  // error handling
                                         $(".employee-grid-error").html("");
-                                        $("#employee-grid").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
                                         $("#employee-grid_processing").css("display","none");
                                     }
                                 }
