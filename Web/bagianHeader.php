@@ -144,40 +144,10 @@
                                     <span>Dashboard</span>
                                 </a>
                                 <ul class="sub">
-                                    <li><a href="?page=acd">Export data</a></li>
-                                    <li><a href="?page=acd">Export report</a></li> 
+                                    <li><a href="?page=custom">Exportar informes personalizados</a></li>
+                                    <li><a href="?page=profile">Configuración perfiles de pozos</a></li> 
                                 </ul>
                             </li>
-
-                             <!-- 
-                            <li class="sub-menu">
-                                <a href="javascript:;">
-                                    <i class="fa fa-suitcase"></i>
-                                    <span>Sistema</span>
-                                </a>
-                                <!-- <ul class="sub">
-                                    <li><a href="?page=user">(Hotspot) Usuario</a></li>
-				                    <li><a href="?page=user_generate">(Hotspot) Generar / Imprimir usuario </a></li>
-                                    <li><a href="?page=active">(Hotspot) Usuarios Activos</a></li>
-									<li><a href="?page=user_profile">(Hotspot) Perfil</a></li>
-                                    <li><a href="?page=hosts">(Hotspot) Host</a></li>
-                                    <li><a href="?page=ip_binding">(Hotspot) Ip Binding</a></li>
-                                    <li><a href="?page=queues_simple">Queues Simples</a></li>
-                                    <li><a href="?page=ppp_user">(PPP / PPPoE) Usuario</a></li>
-                                    <li><a href="?page=ppp_profile">(PPP / PPPoE) Perfiles</a></li>
-                                </ul> 
-                            </li>
-                            <li class="sub-menu">
-                                <a href="javascript:;">
-                                    <i class="fa fa-money"></i>
-                                    <span>Internet prepago</span>
-                                </a>
-                                <ul class="sub">
-                                    <li><a href="?page=prepaid/ticket">Generar un ticket</a></li>
-				                    <li><a href="?page=prepaid/search">Registro de usuarios</a></li>
-                                    <li><a href="?page=prepaid/billing">Registro de ventas</a></li>
-                                </ul>
-                            </li>-->
                             <li>
                                 <a href="?page=setting">
                                     <i class="fa fa-cogs"></i>
@@ -185,7 +155,7 @@
                                 </a>
                                 <ul class="sub">
                                     <li><a href="?page=setting">Cambiar mi contraseña</a></li>
-									<li><a href="?page=correos">Añadir correos a reporte semanal</a></li>
+									<li><a href="?page=correos">Correos para envío de reportes</a></li>
                                      </ul>
                             </li
                     </div>        
