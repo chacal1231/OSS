@@ -80,7 +80,6 @@
 <script src="backend/plugin/fp/bootstrap-fileupload.js"></script>
 
 <!--Fusion Charts-->
-<script type="text/javascript" src="http://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
 
 <script type="text/javascript">         
     $(document).on('click', '#modal-form-submit', function (e) {
