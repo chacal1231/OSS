@@ -239,7 +239,7 @@ $row2 = mysqli_fetch_array($result2);
     <div class="col-sm-6">
         <section class="panel">
             <header class="panel-heading">
-               Process Temperature
+               Liquid Flow Rate
             </header>
             <div class="panel-body"> 
                 <div class="table-responsive">
@@ -364,4 +364,36 @@ window.onload = function () {
         </section>
     </div>
 </body>
+
+<div class="col-sm-6">
+        <section class="panel">
+            <header class="panel-heading">
+                GVF 
+            </header>
+            <div class="panel-body"> 
+                <div class="table-responsive">
+                    <div id="chart3" style="height: 370px; max-width: 920px; margin: 0px auto;""></div>
+                    <script src="backend/js/canvasjs.min.js"></script>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+
+<div class="col-sm-6">
+        <section class="panel">
+            <header class="panel-heading">
+                Pressure Rate
+            </header>
+            <div class="panel-body"> 
+                <div class="table-responsive">
+                    <div id="chart4" style="height: 370px; max-width: 920px; margin: 0px auto;""></div>
+                    <script src="backend/js/canvasjs.min.js"></script>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
 
