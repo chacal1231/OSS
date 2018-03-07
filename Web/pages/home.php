@@ -335,6 +335,94 @@ window.onload = function () {
                     updateChart2()
                 }, updateInterval);
 
+                //Chart 3
+
+                var dataLength3 = 0;
+                var data3 = [];
+                var updateInterval3 = 500;
+                updateChart3();
+                function updateChart3() {
+                    $.getJSON("pages/jsonchargvf.php", function (result3) {
+                        if (dataLength3 !== result3.length) {
+                            for (var i = dataLength3; i < result3.length; i++) {
+                                data3.push({
+                                    label: (result3[i].valorx),
+                                    y: parseFloat(result3[i].valory)
+                                });
+                            }
+                            dataLength3 = result3.length;
+                            chart3.render();
+                        }
+                    });
+                }
+                var chart3 = new CanvasJS.Chart("chart3", {
+                    zoomEnabled: true,
+                    title: {
+                        text: "GVF"
+                    },
+                    axisX: {
+                        title: "chart updates every " + 60 + " secs"
+                    },
+                    axisY: {
+                        title: "%",
+
+                        suffix: " %",
+
+                    },
+                    data: [{type: "line",
+                             toolTipContent: "{label} : {y} Sm3/d",
+                             lineColor: "red", 
+
+                            dataPoints: data2}],
+                });
+                setInterval(function () {
+                    updateChart3()
+                }, updateInterval);
+
+                //Chart 4
+
+                var dataLength4 = 0;
+                var data4 = [];
+                var updateInterval4 = 500;
+                updateChart4();
+                function updateChart4() {
+                    $.getJSON("pages/jsoncharpress.php", function (result4) {
+                        if (dataLength4 !== result4.length) {
+                            for (var i = dataLength4; i < result4.length; i++) {
+                                data4.push({
+                                    label: (result4[i].valorx),
+                                    y: parseFloat(result4[i].valory)
+                                });
+                            }
+                            dataLength4 = result4.length;
+                            chart4.render();
+                        }
+                    });
+                }
+                var chart4 = new CanvasJS.Chart("chart4", {
+                    zoomEnabled: true,
+                    title: {
+                        text: "Pressure"
+                    },
+                    axisX: {
+                        title: "chart updates every " + 60 + " secs"
+                    },
+                    axisY: {
+                        title: "kPa",
+
+                        suffix: " kPa",
+
+                    },
+                    data: [{type: "line",
+                             toolTipContent: "{label} : {y} Sm3/d",
+                             lineColor: "red", 
+
+                            dataPoints: data2}],
+                });
+                setInterval(function () {
+                    updateChart4()
+                }, updateInterval);
+
 
 }
 </script>
