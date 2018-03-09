@@ -314,7 +314,7 @@ window.onload = function () {
                 var chart2 = new CanvasJS.Chart("chart2", {
                     zoomEnabled: true,
                     title: {
-                        text: "Oil Flow Rate"
+                        text: "Liquid Flow Rate"
                     },
                     axisX: {
                         title: "chart updates every " + 60 + " secs"
@@ -370,10 +370,10 @@ window.onload = function () {
 
                     },
                     data: [{type: "line",
-                             toolTipContent: "{label} : {y} Sm3/d",
+                             toolTipContent: "{label} : {y} %",
                              lineColor: "red", 
 
-                            dataPoints: data2}],
+                            dataPoints: data3}],
                 });
                 setInterval(function () {
                     updateChart3()
@@ -414,10 +414,10 @@ window.onload = function () {
 
                     },
                     data: [{type: "line",
-                             toolTipContent: "{label} : {y} Sm3/d",
+                             toolTipContent: "{label} : {y} kPa",
                              lineColor: "red", 
 
-                            dataPoints: data2}],
+                            dataPoints: data4}],
                 });
                 setInterval(function () {
                     updateChart4()
@@ -441,7 +441,7 @@ window.onload = function () {
         <div class="col-sm-6">
         <section class="panel">
             <header class="panel-heading">
-                Oil Flow rate 
+                Liquid Flow rate 
             </header>
             <div class="panel-body"> 
                 <div class="table-responsive">
