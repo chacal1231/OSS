@@ -8,8 +8,8 @@ if(isset($_POST['simpan'])){
     $fecha2=$_POST['datepicker1'];
     $usuario=$_POST['usuario'];
     if($usuario=="Todos"){
-        $query_start=mysqli_query($link,"SELECT id FROM minutedata WHERE Datex='$fecha1' ORDER BY id ASC LIMIT 0,1");
-        $query_stop=mysqli_query($link,"SELECT id FROM minutedata WHERE Datex='$fecha2' ORDER BY id DESC LIMIT 0,1");
+        $query_start=mysqli_query($link,"SELECT id FROM minutedata WHERE Datex>='$fecha1' ORDER BY id ASC LIMIT 0,1");
+        $query_stop=mysqli_query($link,"SELECT id FROM minutedata WHERE Datex<='$fecha2' ORDER BY id DESC LIMIT 0,1");
     }else{
         $query=mysqli_query($link,"SELECT * FROM minutedata WHERE Datex  BETWEEN '$fecha1' and '$fecha2' AND wellid LIKE '$usuario'");
     }
@@ -17,7 +17,7 @@ if(isset($_POST['simpan'])){
     $id_start = $row_start['id'];
     $row_stop = mysqli_fetch_array($query_stop);
     $id_stop = $row_stop['id'];
-    echo "Start:$id_start Y Stop:$id_stop";
+    //echo "Start:$id_start Y Stop:$id_stop";
     echo "<script>setTimeout(\"location.href = 'pages/pdfcustom.php?st1=$id_start&st2=$id_stop';\");</script>";
     //Consulta a tabla de usuarios
     $query=mysqli_query($link,"SELECT * FROM usuarios WHERE usuario='$usuario'");
