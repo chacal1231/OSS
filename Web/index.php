@@ -1,4 +1,9 @@
 <?php
+// server should keep session data for AT LEAST 1 hour
+ini_set('session.gc_maxlifetime', 36000);
+
+// each client should remember their session id for EXACTLY 1 hour
+session_set_cookie_params(36000);
 session_start();
 ob_start();
 if (!$_SESSION['admin']){
